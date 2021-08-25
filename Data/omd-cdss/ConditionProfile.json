@@ -1,0 +1,372 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "profile-condition",
+  "meta": {
+    "lastUpdated": "2021-05-07T11:49:07.843+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/conditionprofile",
+  "version": "0.2",
+  "name": "ConditionProfile",
+  "title": "Condition Profile",
+  "status": "draft",
+  "date": "2021-05-07T11:38:34.2029829+00:00",
+  "publisher": "OMD",
+  "description": "Proposed constraints and extensions on the Condition Resource",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "CA",
+          "display": "Canada"
+        }
+      ]
+    }
+  ],
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Condition",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Condition",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Condition",
+        "path": "Condition",
+        "short": "Condition Profile",
+        "definition": "The Condition Profile is based upon the core FHIR Condition Resource"
+      },
+      {
+        "id": "Condition.clinicalStatus",
+        "path": "Condition.clinicalStatus",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe clinical status of the condition.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe status of the problem or the diagnosed disease, often using only a few words (e.g., active, in remission).",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE06.006",
+            "comment": "Problem Status"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE07.008",
+            "comment": "Problem Status"
+          }
+        ]
+      },
+      {
+        "id": "Condition.verificationStatus",
+        "path": "Condition.verificationStatus",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.category",
+        "path": "Condition.category",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code",
+        "path": "Condition.code",
+        "definition": "Identification of the patient's relevant condition, problem or diagnosis or recording of 'problem absent' or of 'problems unknown', as interpreted by the provider.",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code.coding",
+        "path": "Condition.code.coding",
+        "definition": "Identification of the patient's relevant condition, problem or diagnosis or recording of 'problem absent' or of 'problems unknown', as interpreted by the provider.",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code.coding.code",
+        "path": "Condition.code.coding.code",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).\r\n\r\nCDS-S PROFILE DEFINITION:\r\nA description (e.g., name, label) that identifies the patient's problem or diagnosed disease (e.g., Anxiety, Diabetes Melitus Type II).",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE06.004",
+            "comment": "Diagnosis/Problem"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE07.004",
+            "comment": "Diagnosis/Problme"
+          }
+        ]
+      },
+      {
+        "id": "Condition.code.text",
+        "path": "Condition.code.text",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.\r\n\r\nCDS-S PROFILE DEFINITION (Ongoing Health Conditions - Problem Description):\r\nA description of the problem reported. Used to express a synopsis of progress or additional details about the health concern, problem or diagnosis.\r\n\r\nCDS-S PROFILE DEFINITION (Risk Factors - Risk Factor): \r\nThe factors that mght place the patient at health risk (e.g., drinking, smoking, obesity, exposure to asbestos, premature birth). \r\n\r\nCDS-S PROFILE DEFINITION (Alerts & Special Needs - Alert Description): \r\nDescription of the alert or special need.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE06.005",
+            "comment": "Problem Description"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE12.001",
+            "comment": "Risk Factor"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE13.001",
+            "comment": "Alert Description"
+          }
+        ]
+      },
+      {
+        "id": "Condition.subject",
+        "path": "Condition.subject",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.encounter",
+        "path": "Condition.encounter",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-encounter"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Condition.onset[x]",
+        "path": "Condition.onset[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "definition": "BASE RESOURCE DEFINITION:\r\nEstimated or actual date or date-time  the condition began, in the opinion of the clinician.",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.onset[x]:onsetAge",
+        "path": "Condition.onset[x]",
+        "sliceName": "onsetAge",
+        "definition": "BASE RESOURCE DEFINITION: \r\nEstimated or actual date or date-time  the condition began, in the opinion of the clinician.\r\n\r\nCDS-S PROFILE DEFINITION (Risk Factors- Age at Onset): \r\nThe age of the patient at the onset of the condition.",
+        "type": [
+          {
+            "code": "Age"
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE12.003",
+            "comment": "Age at Onset"
+          }
+        ]
+      },
+      {
+        "id": "Condition.onset[x]:onsetString",
+        "path": "Condition.onset[x]",
+        "sliceName": "onsetString",
+        "definition": "BASE RESOURCE DEFINITION: \r\nEstimated or actual date or date-time  the condition began, in the opinion of the clinician.\r\n\r\nCDS-S PROFILE DEFINITION (Ongoing Health Conditions - Life Stage): \r\nThe stage of life that the patient was at the onset of the condition (problem or diagnosed disease)\r\n\r\nCDS-S PROFILE DEFINITION (Past Medical & Surgical History - Life Stage): \r\nThe stage of life that the patient was at the onset of the condition (problem or diagnosed disease)",
+        "comment": "Age is generally used when the patient reports an age at which the Condition began to occur.\r\n\r\nCODE SET TABLE: \r\nCT-016: Life Stage",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE06.002",
+            "comment": "Life Stage"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE07.002",
+            "comment": "Life Stage"
+          }
+        ]
+      },
+      {
+        "id": "Condition.onset[x]:onsetPeriod",
+        "path": "Condition.onsetPeriod",
+        "sliceName": "onsetPeriod",
+        "type": [
+          {
+            "code": "Period",
+            "profile": [
+              "https://simplifier.net/omd-cdss/conditiononset"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Condition.onset[x]:onsetDateTime",
+        "path": "Condition.onset[x]",
+        "sliceName": "onsetDateTime",
+        "definition": "BASE RESOURCE DEFINITION:\r\nEstimated or actual date or date-time  the condition began, in the opinion of the clinician.\r\n\r\nCDS-S PROFILE DEFINITION (Risk Factors - Start Date): \r\nThe date that the patient was first exposed to the risk factor. \r\n\r\nCDS-S PROFILE DEFINITION (Alerts & Special Needs - Date Active): \r\nThe date that the alert or special need was identified as active for the first time.",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE12.004",
+            "comment": "Start Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE13.003",
+            "comment": "Date Active"
+          }
+        ]
+      },
+      {
+        "id": "Condition.abatement[x]",
+        "path": "Condition.abatement[x]",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe date or estimated date that the condition resolved or went into remission. This is called \"abatement\" because of the many overloaded connotations associated with \"remission\" or \"resolution\" - Conditions are never really resolved, but they can abate.\r\n\r\nCDS-S PROFILE DEFINITION (Ongoing Health Conditions - Resolution Date):\r\nThe date when the problem or the diagnosed disease was resolved or controlled.\r\n\r\nCDS-S PROFILE DEFINITION (Past Medical and Surgical History - Resolution Date):\r\nThe date when the problem or the diagnosed disease was resolved or controlled.\r\n\r\nCDS-S PROFILE DEFINITION (Risk Factors - End Date): \r\n(Condition.abatement.abatementDateTime) - The date the patient was last exposed to the risk factor. \r\n\r\nCDS-S PROFILE DEFINITION (Alerts & Special Needs- End Date): \r\n(Condition.abatement.abatementDateTime)  - Date the alert or special need was identified as no longer active.",
+        "type": [
+          {
+            "code": "dateTime"
+          },
+          {
+            "code": "Age"
+          },
+          {
+            "code": "Period",
+            "profile": [
+              "http://example.org/fhir/StructureDefinition/AbatementPeriod"
+            ]
+          },
+          {
+            "code": "Range"
+          },
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE06.003",
+            "comment": "Resolution Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE07.003",
+            "comment": "Resolution Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE12.004",
+            "comment": "End Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE13.004",
+            "comment": "End Date"
+          }
+        ]
+      },
+      {
+        "id": "Condition.recorder",
+        "path": "Condition.recorder",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitioner",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitionerrole",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient",
+              "http://hl7.org/fhir/StructureDefinition/RelatedPerson"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Condition.asserter",
+        "path": "Condition.asserter",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitioner",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitionerrole",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient",
+              "http://hl7.org/fhir/StructureDefinition/RelatedPerson"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Condition.evidence.code",
+        "path": "Condition.evidence.code",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA manifestation or symptom that led to the recording of this condition.\r\n\r\nCDS-S PROFILE DEFINITION (Risk Factors):\r\nSpecific agent details of the exposure (e.g., 2 packs a day; 10 bottles of wine per week)",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE12.002",
+            "comment": "Exposure Details"
+          }
+        ]
+      },
+      {
+        "id": "Condition.note",
+        "path": "Condition.note",
+        "definition": "BASE RESOURCE DEFINITION:\r\nAdditional information about the Condition. This is a general notes/comments entry  for description of the Condition, its diagnosis and prognosis.\r\n\r\nCDS-S PROFILE DEFINITION (Ongoing Health Conditions - Notes):\r\nAdditional notes about the problem or the diagnosed disease. \r\n\r\nCDS-S PROFILE DEFINITION (Past Medical & Surgical History - Notes): \r\nAdditional notes about the \"Past Medical and Surgical\" medical records. \r\n\r\n\"Notes\" apply to Problems, Diagnosis, and Procedure medical records. \r\n\r\nIf note pertains to procedure, then use \"Procedure.note\" instead.\r\n\r\nCDS-S PROFILE DEFINITION (Risk Factors - Notes): \r\nAdditional Notes about the risk factor. \r\n\r\nCDS-S PROFILE DEFINITION (Alerts & Special Needs - Notes): \r\nAdditioal notes about an alert or special need.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE06.007",
+            "comment": "Notes"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE07.007",
+            "comment": "Notes"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE12.007",
+            "comment": "Notes"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE13.002",
+            "comment": "Notes"
+          }
+        ]
+      }
+    ]
+  }
+}

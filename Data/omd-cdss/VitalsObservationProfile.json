@@ -1,0 +1,758 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "profile-vitals",
+  "meta": {
+    "lastUpdated": "2021-05-17T20:50:33.900+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/vitalsobservationprofile",
+  "version": "0.2.0",
+  "name": "VitalsObservationProfile",
+  "title": "Observation Profile (Vitals)",
+  "status": "draft",
+  "date": "2021-05-17T20:35:14.5079805+00:00",
+  "publisher": "OMD",
+  "description": "Proposed constraints on the Observation Resource for general use",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "CA",
+          "display": "Canada"
+        }
+      ]
+    }
+  ],
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation",
+        "path": "Observation",
+        "short": "Observation Profile",
+        "definition": "The Observation Profile is based upon the core FHIR Observation Resource"
+      },
+      {
+        "id": "Observation.basedOn",
+        "path": "Observation.basedOn",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/CarePlan",
+              "http://hl7.org/fhir/StructureDefinition/DeviceRequest",
+              "http://hl7.org/fhir/StructureDefinition/ImmunizationRecommendation",
+              "http://hl7.org/fhir/StructureDefinition/NutritionOrder",
+              "http://hl7.org/fhir/StructureDefinition/ServiceRequest",
+              "https://simplifier.net/omd-cdss/medicationrequestprofile"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Observation.partOf",
+        "path": "Observation.partOf",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/MedicationAdministration",
+              "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
+              "http://hl7.org/fhir/StructureDefinition/ImagingStudy",
+              "https://simplifier.net/omd-cdss/immunizationprofile",
+              "https://simplifier.net/omd-cdss/procedureprofile",
+              "https://simplifier.net/omd-cdss/medicationdispenseprofile"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "profile",
+              "path": "resolve()"
+            }
+          ],
+          "rules": "open"
+        },
+        "comment": "The binding strength of this element is [Preferred](https://www.hl7.org/fhir/terminologies.html#strength), meaning that codes are encouraged to draw from the LOINC code system for interoperability purposes but are not required to do so to be considered conformant. *All* code-value and, if present, component.code-component.value pairs need to be taken into account to correctly understand the meaning of the observation.",
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "description": "LOINC codes identifying names of simple observations."
+        }
+      },
+      {
+        "id": "Observation.code.coding",
+        "path": "Observation.code.coding",
+        "type": [
+          {
+            "code": "Coding",
+            "profile": [
+              "https://simplifier.net/omd-cdss/heartratecode",
+              "https://simplifier.net/omd-cdss/heightcode",
+              "https://simplifier.net/omd-cdss/weightcode",
+              "https://simplifier.net/omd-cdss/bmicode",
+              "https://simplifier.net/omd-cdss/waistcircumferencecode",
+              "https://simplifier.net/omd-cdss/smokingstatuscode",
+              "https://simplifier.net/omd-cdss/smokingfrequencycode",
+              "https://simplifier.net/omd-cdss/alcoholusecode",
+              "https://simplifier.net/omd-cdss/erectilefunctioncode",
+              "https://simplifier.net/omd-cdss/bloodpressurepanelcode"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.code.coding.system",
+        "path": "Observation.code.coding.system",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.003",
+            "comment": "Heart Rate"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.005",
+            "comment": "Height"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.007",
+            "comment": "Weight"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.009",
+            "comment": "BMI"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.011",
+            "comment": "Waist Circumference"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.013",
+            "comment": "Smoking Status"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.015",
+            "comment": "Smoking Frequency"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.017",
+            "comment": "Alcohol Use"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.019",
+            "comment": "Erectile Function"
+          }
+        ]
+      },
+      {
+        "id": "Observation.code.coding.code",
+        "path": "Observation.code.coding.code",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.003",
+            "comment": "Heart Rate"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.005",
+            "comment": "Height"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.007",
+            "comment": "Weight"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.009",
+            "comment": "BMI"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.011",
+            "comment": "Waist Circumference"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.013",
+            "comment": "Smoking Status"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.015",
+            "comment": "Smoking Frequency"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.017",
+            "comment": "Alcohol Use"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.019",
+            "comment": "Erectile Function"
+          }
+        ]
+      },
+      {
+        "id": "Observation.subject",
+        "path": "Observation.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://simplifier.net/omd-cdss/patientprofile"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.effective[x]",
+        "path": "Observation.effective[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.effective[x]:effectiveDateTime",
+        "path": "Observation.effective[x]",
+        "sliceName": "effectiveDateTime",
+        "definition": "BASE RESOURCE DEFINITION: \r\nThe time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \"physiologically relevant time\". This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe date the observation was measured.",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.002",
+            "comment": "Blood Pressure - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.004",
+            "comment": "Heart Rate - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.006",
+            "comment": "Height - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.008",
+            "comment": "Weight - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.010",
+            "comment": "BMI - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.012",
+            "comment": "Waist Circumference - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.014",
+            "comment": "Smoking Status - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.016",
+            "comment": "Smoking Frequency - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.018",
+            "comment": "Alcohol Use - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.020",
+            "comment": "Erectile Function - Date"
+          }
+        ]
+      },
+      {
+        "id": "Observation.performer",
+        "path": "Observation.performer",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/PractitionerRole",
+              "http://hl7.org/fhir/StructureDefinition/Organization",
+              "http://hl7.org/fhir/StructureDefinition/CareTeam",
+              "http://hl7.org/fhir/StructureDefinition/RelatedPerson",
+              "https://simplifier.net/omd-cdss/patientprofile",
+              "https://simplifier.net/omd-cdss/practitionerprofile"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "profile",
+              "path": "resolve()"
+            }
+          ],
+          "rules": "open"
+        },
+        "constraint": [
+          {
+            "key": "ca-baseline-value-1",
+            "severity": "error",
+            "human": "Observation.value[x] or Observation.dataAbsentReason or Observation.component SHOULD be present",
+            "expression": "value[x].exists() or dataAbsentReason.exists() or component.exists()",
+            "xpath": "Observation.value[x] or Observation.dataAbsentReason or Observation.component",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.value[x]:valueQuantity",
+        "path": "Observation.valueQuantity",
+        "sliceName": "valueQuantity",
+        "type": [
+          {
+            "code": "Quantity",
+            "profile": [
+              "https://simplifier.net/omd-cdss/heartratevalue",
+              "https://simplifier.net/omd-cdss/heightvalue",
+              "https://simplifier.net/omd-cdss/weightvalue",
+              "https://simplifier.net/omd-cdss/bmivalue",
+              "https://simplifier.net/omd-cdss/waistcircumferencevalue",
+              "https://simplifier.net/omd-cdss/smokingstatusvalue",
+              "https://simplifier.net/omd-cdss/smokingfrequencyvalue",
+              "https://simplifier.net/omd-cdss/alcoholusevalue",
+              "https://simplifier.net/omd-cdss/erectilefunctionvalue"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.value[x]:valueQuantity.value",
+        "path": "Observation.valueQuantity.value",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.003",
+            "comment": "Heart rate"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.005",
+            "comment": "Height"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.007",
+            "comment": "Weight"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.009",
+            "comment": "BMI"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.011",
+            "comment": "Waist Circumference"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.013",
+            "comment": "Smoking Status"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.015",
+            "comment": "Smoking Frequency"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.017",
+            "comment": "Alcohol Use"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.019",
+            "comment": "Erectile Function"
+          }
+        ]
+      },
+      {
+        "id": "Observation.value[x]:valueQuantity.unit",
+        "path": "Observation.valueQuantity.unit",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.003",
+            "comment": "Heart Rate"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.005",
+            "comment": "Height"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.007",
+            "comment": "Weight"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.009",
+            "comment": "BMI"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.011",
+            "comment": "Waist Circumference"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.015",
+            "comment": "Smoking Frequency"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.017",
+            "comment": "Alcohol Use"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.019",
+            "comment": "Erectile Function"
+          }
+        ]
+      },
+      {
+        "id": "Observation.value[x]:valueQuantity.system",
+        "path": "Observation.valueQuantity.system",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.003",
+            "comment": "Heart Rate"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.005",
+            "comment": "Height"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.007",
+            "comment": "Weight"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.009",
+            "comment": "BMI"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.011",
+            "comment": "Waist Circumference"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.017",
+            "comment": "Alcohol Use"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.019",
+            "comment": "Erectile Function"
+          }
+        ]
+      },
+      {
+        "id": "Observation.dataAbsentReason",
+        "path": "Observation.dataAbsentReason",
+        "constraint": [
+          {
+            "key": "ca-baseline-value-1",
+            "severity": "error",
+            "human": "Observation.value[x] or Observation.dataAbsentReason or Observation.component SHOULD be present",
+            "expression": "value[x].exists() or dataAbsentReason.exists() or component.exists()",
+            "xpath": "Observation.value[x] or Observation.dataAbsentReason or Observation.component",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component",
+        "path": "Observation.component",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "code.coding.code"
+            },
+            {
+              "type": "value",
+              "path": "code.coding.system"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Observation.component.code",
+        "path": "Observation.component.code",
+        "comment": "The binding strength of this element is [Preferred](https://www.hl7.org/fhir/terminologies.html#strength), meaning that codes are encouraged to draw from the LOINC code system for interoperability purposes but are not required to do so to be considered conformant. *All* code-value and, if present, component.code-component.value pairs need to be taken into account to correctly understand the meaning of the observation.",
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "description": "LOINC codes identifying names of simple observations."
+        }
+      },
+      {
+        "id": "Observation.component.value[x]",
+        "path": "Observation.component.value[x]",
+        "constraint": [
+          {
+            "key": "ca-baseline-value-2",
+            "severity": "error",
+            "human": "Observation.component.value[x] or Observation.component.dataAbsentReason SHALL be present",
+            "expression": "component.value[x].exists() or component.dataAbsentReason.exists()",
+            "xpath": "Observation.component.value[x] or Observation.component.dataAbsentReason",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component.dataAbsentReason",
+        "path": "Observation.component.dataAbsentReason",
+        "constraint": [
+          {
+            "key": "ca-baseline-value-2",
+            "severity": "error",
+            "human": "Observation.component.value[x] or Observation.component.dataAbsentReason SHALL be present",
+            "expression": "component.value[x].exists() or component.dataAbsentReason.exists()",
+            "xpath": "Observation.component.value[x] or Observation.component.dataAbsentReason",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component:SystolicBP",
+        "path": "Observation.component",
+        "sliceName": "SystolicBP"
+      },
+      {
+        "id": "Observation.component:SystolicBP.code.coding.system",
+        "path": "Observation.component.code.coding.system",
+        "fixedUri": "http://loinc.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          }
+        ]
+      },
+      {
+        "id": "Observation.component:SystolicBP.code.coding.code",
+        "path": "Observation.component.code.coding.code",
+        "fixedCode": "8480-6",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          }
+        ]
+      },
+      {
+        "id": "Observation.component:SystolicBP.value[x]",
+        "path": "Observation.component.value[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Observation.component:SystolicBP.value[x]:valueQuantity",
+        "path": "Observation.component.valueQuantity",
+        "sliceName": "valueQuantity",
+        "type": [
+          {
+            "code": "Quantity",
+            "profile": [
+              "https://simplifier.net/omd-cdss/systolicbpvalue"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Observation.component:SystolicBP.value[x]:valueQuantity.value",
+        "path": "Observation.component.valueQuantity.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the measured amount. The value includes an implicit precision in the presentation of the value.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe systolic blood pressure as measured by the provider.",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component:SystolicBP.value[x]:valueQuantity.unit",
+        "path": "Observation.component.valueQuantity.unit",
+        "fixedString": "mm[Hg]",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component:SystolicBP.value[x]:valueQuantity.system",
+        "path": "Observation.component.valueQuantity.system",
+        "fixedUri": "http://unitsofmeasure.org",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component:DiastolicBP",
+        "path": "Observation.component",
+        "sliceName": "DiastolicBP"
+      },
+      {
+        "id": "Observation.component:DiastolicBP.code.coding.system",
+        "path": "Observation.component.code.coding.system",
+        "fixedUri": "http://loinc.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          }
+        ]
+      },
+      {
+        "id": "Observation.component:DiastolicBP.code.coding.code",
+        "path": "Observation.component.code.coding.code",
+        "fixedCode": "8462-4",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          }
+        ]
+      },
+      {
+        "id": "Observation.component:DiastolicBP.value[x]",
+        "path": "Observation.component.value[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Observation.component:DiastolicBP.value[x]:valueQuantity",
+        "path": "Observation.component.valueQuantity",
+        "sliceName": "valueQuantity",
+        "type": [
+          {
+            "code": "Quantity",
+            "profile": [
+              "https://simplifier.net/omd-cdss/diastolicbpvalue"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

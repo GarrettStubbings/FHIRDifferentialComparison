@@ -1,0 +1,68 @@
+{
+  "resourceType": "StructureDefinition",
+  "meta": {
+    "lastUpdated": "2021-03-25T16:00:22.502+00:00"
+  },
+  "url": "http://example.org/fhir/StructureDefinition/SystolicBPCode",
+  "name": "SystolicBPCode",
+  "title": "Vitals Care Elements - Systolic Blood Pressure - LOINC Code",
+  "status": "draft",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "orim",
+      "uri": "http://hl7.org/orim",
+      "name": "Ontological RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Coding",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Coding",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Coding.system",
+        "path": "Coding.system",
+        "fixedUri": "http://loinc.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          }
+        ]
+      },
+      {
+        "id": "Coding.code",
+        "path": "Coding.code",
+        "fixedCode": "8480-6",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          }
+        ]
+      }
+    ]
+  }
+}

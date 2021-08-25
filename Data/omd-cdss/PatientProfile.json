@@ -1,0 +1,630 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "profile-patient",
+  "meta": {
+    "lastUpdated": "2021-05-17T21:16:33.407+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/patientprofile",
+  "version": "0.1.1",
+  "name": "PatientProfile",
+  "title": "Patient Profile",
+  "status": "draft",
+  "date": "2021-05-17T21:08:41.2739574+00:00",
+  "publisher": "OMD",
+  "description": "Proposed constraints and extensions on the Patient Resource",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Patient",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Patient",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Patient",
+        "path": "Patient",
+        "short": "Patient Profile 3",
+        "definition": "The Patient Profile is based upon the core FHIR Patient Resource",
+        "mustSupport": true,
+        "isModifier": false
+      },
+      {
+        "id": "Patient.identifier",
+        "path": "Patient.identifier",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "type"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Patient.identifier.type",
+        "path": "Patient.identifier.type",
+        "min": 1,
+        "example": [
+          {
+            "label": "Pattern",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "MR"
+                }
+              ]
+            }
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.identifier.system",
+        "path": "Patient.identifier.system",
+        "min": 1,
+        "mustSupport": true,
+        "isModifier": false
+      },
+      {
+        "id": "Patient.identifier.value",
+        "path": "Patient.identifier.value",
+        "short": "The value that is unique within the system",
+        "definition": "BASE RESOURCE DEFINITION: \r\nThe portion of the identifier typically relevant to the user and which is unique within the context of the system.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe number used by the medical practice to identify the associated hardcopy chart.",
+        "min": 1,
+        "mustSupport": true,
+        "isModifier": false,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.012",
+            "comment": "Chart Number"
+          }
+        ]
+      },
+      {
+        "id": "Patient.identifier:PPN",
+        "path": "Patient.identifier",
+        "sliceName": "PPN",
+        "short": "Canada Passport Number",
+        "mustSupport": false
+      },
+      {
+        "id": "Patient.identifier:PPN.type",
+        "path": "Patient.identifier.type",
+        "short": "Passport number identifier type",
+        "min": 1,
+        "fixedCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "PPN"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Patient.identifier:PPN.system",
+        "path": "Patient.identifier.system",
+        "short": "A Canadian passport number Naming System from the Canadian URI Registry",
+        "min": 1,
+        "fixedUri": "https://fhir.infoway-inforoute.ca/NamingSystem/ca-passport-number"
+      },
+      {
+        "id": "Patient.identifier:PPN.value",
+        "path": "Patient.identifier.value",
+        "short": "A Canadian passport number",
+        "min": 1
+      },
+      {
+        "id": "Patient.identifier:JPID",
+        "path": "Patient.identifier",
+        "sliceName": "JPID",
+        "short": "Jurisdictional Person Identification",
+        "definition": "Federal patient and person identifiers used by all jurisdictions across Canada",
+        "mustSupport": false
+      },
+      {
+        "id": "Patient.identifier:JPID.type",
+        "path": "Patient.identifier.type",
+        "short": "Jurisdictional Person Identification",
+        "min": 1,
+        "fixedCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "JPID"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Patient.identifier:JPID.system",
+        "path": "Patient.identifier.system",
+        "short": "Jurisdictional Person identification Naming System from the Canadian URI Registry",
+        "min": 1
+      },
+      {
+        "id": "Patient.identifier:JPID.value",
+        "path": "Patient.identifier.value",
+        "short": "Jurisdictional Person identification number",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe portion of the identifier typically relevant to the user and which is unique within the context of the system.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nSIN is a nine-digit number assigned by the Government of Canada to individuals that allows them to work in the country and access certain government programs and benefits.",
+        "min": 1,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.024",
+            "comment": "Social Insurance Number (SIN)"
+          }
+        ]
+      },
+      {
+        "id": "Patient.identifier:JHN",
+        "path": "Patient.identifier",
+        "sliceName": "JHN",
+        "short": "Jurisdictional Health Number",
+        "definition": "Federal patient and person health numbers used by all jurisdictions across Canada"
+      },
+      {
+        "id": "Patient.identifier:JHN.extension",
+        "path": "Patient.identifier.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Patient.identifier:JHN.extension:versionCode",
+        "path": "Patient.identifier.extension",
+        "sliceName": "versionCode",
+        "short": "Health Number Version Code",
+        "definition": "BASE RESOURCE DEFINITION: \r\nMay be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe two-digit code associated with the Ontario health card number that uniquely identifies the status of that health card.",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/ext-identifierversion"
+            ]
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.009",
+            "comment": "Health Card Version Code"
+          }
+        ]
+      },
+      {
+        "id": "Patient.identifier:JHN.type",
+        "path": "Patient.identifier.type",
+        "min": 1,
+        "fixedCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "JHN"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.identifier:JHN.system",
+        "path": "Patient.identifier.system",
+        "short": "A Health Number Naming System from the Canadian URI Registry",
+        "definition": "BASE RESOURCE DEFINITION: \r\nEstablishes the namespace for the value - that is, a URL that describes a set values that are unique.\r\n\r\nCDS-S PROFILE RESOURCE: \r\nThe legal entity (province) responsible for assigning the health card number.",
+        "min": 1,
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.010",
+            "comment": "Health Card Province"
+          }
+        ]
+      },
+      {
+        "id": "Patient.identifier:JHN.value",
+        "path": "Patient.identifier.value",
+        "definition": "BASE RESOURCE DEFINITION: \r\nThe portion of the identifier typically relevant to the user and which is unique within the context of the system.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe lifetime identification number assigned to all eligeble residents within a jursidiction (province) to receive provincially funded insured health services.",
+        "min": 1,
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.008",
+            "comment": "Health Card Number (HCN)"
+          }
+        ]
+      },
+      {
+        "id": "Patient.identifier:JHN.period.end",
+        "path": "Patient.identifier.period.end",
+        "definition": "BASE RESOURCE DEFINITION: \r\nThe end of the period. If the end of the period is missing, it means no end was known or planned at the time the instance was created. The start may be in the past, and the end date in the future, which means that period is expected/planned to end at that time.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe expiration date of the health card number.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.011",
+            "comment": "Health Card Expiry Date"
+          }
+        ]
+      },
+      {
+        "id": "Patient.active",
+        "path": "Patient.active",
+        "definition": "BASE RESOURCE DEFINITION:\r\nWhether this patient record is in active use. \nMany systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules.\n\nIt is often used to filter patient lists to exclude inactive patients\n\nDeceased patients may also be marked as inactive for the same reasons, but may be active for some time after death.\r\n\r\nCDS-S PROFILE DEFINITION (Patient Status):\r\nRefers to whether the \"Primary Physician\" considers the patient to be active, inactive, deceased, or other values as supported by the practice. \r\n\r\nCombining the Patient Status and Enrolement Status in a single field is not as acceptable solution. \r\n\r\nTo indicate the status s deceased: \r\nPatient.active= FALSE \r\nPatient.deceased[x] = TRUE \r\n\r\nPatient.deceased[x] = FALSE otherwise to indicate patient status. \r\n\r\nCDS-S PROFILE DEFINITION (Enrolment Status): \r\nRefers to whether the patient: \r\n- is enroled\r\n- enrolment has been terminated or, \r\n- has never ben enroled \r\n\r\nMay have additionl statuses that are related to the \"enrolment\" such as \"enrolment in progress\" \r\n\r\nCombining \"Enroled Status\" and \"Patient Status\" in a single field is not an acceptable solution.",
+        "comment": "If a record is inactive, and linked to an active record, then future patient/record updates should occur on the other patient.\r\n\r\nCODE SET TABLE: \r\nCT-008: Patient Status\r\n\r\nCT-009: Enrolment Status",
+        "meaningWhenMissing": "This resource is generally assumed to be active if no value is provided for the active element.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.016",
+            "comment": "Patient Status"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.019",
+            "comment": "Enrolment Status"
+          }
+        ]
+      },
+      {
+        "id": "Patient.name",
+        "path": "Patient.name",
+        "constraint": [
+          {
+            "key": "ca-baseline-name",
+            "severity": "error",
+            "human": "Patient.name.given  or Patient.name.family or both SHALL be present",
+            "expression": "family.exists() or given.exists()",
+            "xpath": "f:given or f:family",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.name.family",
+        "path": "Patient.name.family",
+        "definition": "BASE RESOURCE DEFINITION: \r\nThe part of a name that links to the genealogy. In some cultures (e.g. Eritrea) the family name of a son is the first name of his father.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe patient's surname or family name",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.002",
+            "comment": "Last Name"
+          }
+        ]
+      },
+      {
+        "id": "Patient.name.given",
+        "path": "Patient.name.given",
+        "definition": "BASE RESOURCE DEFINITION: \r\nGiven name.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe Patient's first name and other given name(s) (e.g., middle name) that is/are not the first name(s). \r\nThe patient's first name should be listed first when possible and the other given names should be listed after the first name, when possible.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.003",
+            "comment": "First Name"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.004",
+            "comment": "Middle Name"
+          }
+        ]
+      },
+      {
+        "id": "Patient.name.prefix",
+        "path": "Patient.name.prefix",
+        "definition": "BASE RESOURCE DEFINITION: \r\nPart of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. \r\nand that appears at the start of the name.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nAn honorific title used when addressing a person by name.",
+        "comment": "Note that FHIR strings SHALL NOT exceed 1MB in size\r\n\r\nCODE SET TABLE: \r\nCT-001: Name Prefix",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.001",
+            "comment": "Name Prefix"
+          }
+        ]
+      },
+      {
+        "id": "Patient.name.suffix",
+        "path": "Patient.name.suffix",
+        "definition": "BASE RESOURCE DEFINITION: \r\nPart of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the end of the name.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nAn additional term placed after a person's name.",
+        "comment": "Note that FHIR strings SHALL NOT exceed 1MB in size\r\n\r\nCODE SET TABLE: \r\nCT-005: Name Suffix",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.005",
+            "comment": "Name Suffix"
+          }
+        ]
+      },
+      {
+        "id": "Patient.telecom",
+        "path": "Patient.telecom",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.telecom.system",
+        "path": "Patient.telecom.system",
+        "min": 1
+      },
+      {
+        "id": "Patient.telecom.value",
+        "path": "Patient.telecom.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address).\r\n\r\nCDS-S PROFILE DEFINITION (Residence Phone): \r\nThe phone number where the patient lives. \r\n\r\nCDS-S PROFILE DEFINITION (Cell Phone): \r\nThe cell phone number for contacting the patient. \r\n\r\nCDS-S PROFILE DEFINITION (Work Phone): \r\nThe organization work phone number where the patient can be reached during working hours. \r\n\r\nCDS-S PROFILE DEFINITION (Work Phone Extension): \r\nThe number used to access the patient's work phone number within an organization. \r\n\r\nCDS-S PROFILE DEFINITION (Patient E-Mail Address): \r\nThe e-mail address preferred by the patient.",
+        "min": 1,
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE02.007",
+            "comment": "Residence Phone"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE02.008",
+            "comment": "Cell Phone"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE02.009",
+            "comment": "Work Phone"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE02.010",
+            "comment": "Work Phone Extension"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE02.011",
+            "comment": "Patient E-Mail Address"
+          }
+        ]
+      },
+      {
+        "id": "Patient.gender",
+        "path": "Patient.gender",
+        "definition": "BASE RESOURCE DEFINITION: \r\nAdministrative Gender - the gender that the patient is considered to have for administration and record keeping purposes.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe reported sexual identity of a person for administrative purposes.",
+        "comment": "The gender might not match the biological sex as determined by genetics or the individual's preferred identification. Note that for both humans and particularly animals, there are other legitimate possibilities than male and female, though the vast majority of systems and contexts only support male and female.  Systems providing decision support or enforcing business rules should ideally do this on the basis of Observations dealing with the specific sex or gender aspect of interest (anatomical, chromosomal, social, etc.)  However, because these observations are infrequently recorded, defaulting to the administrative gender is common practice.  Where such defaulting occurs, rule enforcement should allow for the variation between administrative and biological, chromosomal and other gender aspects.  For example, an alert about a hysterectomy on a male should be handled as a warning or overridable error, not a \"hard\" error.  See the Patient Gender and Sex section for additional information about communicating patient gender and sex.\r\n\r\nCODE SET TABLE: \r\nCT-006: Gender",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.006",
+            "comment": "Gender"
+          }
+        ]
+      },
+      {
+        "id": "Patient.birthDate",
+        "path": "Patient.birthDate",
+        "definition": "BASE RESOURCE DEFINITION: \r\nThe date of birth for the individual.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe date on which the patient was born.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.007",
+            "comment": "Date of Birth"
+          }
+        ]
+      },
+      {
+        "id": "Patient.address.use",
+        "path": "Patient.address.use",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe purpose of this address.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nIndicates type of address for the patient (e.g., is it the permanent residence, a mailing address).",
+        "comment": "Applications can assume that an address is current unless it explicitly says that it is temporary or old.\r\n\r\nCODE SET TABLE: \r\nCT-011 Address Type",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE02.001",
+            "comment": "Address Type"
+          }
+        ]
+      },
+      {
+        "id": "Patient.address.line",
+        "path": "Patient.address.line",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThis component contains the house number, apartment number, street name, street direction,  P.O. Box number, delivery hints, and similar address information\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe street address.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE02.002",
+            "comment": "Street Address"
+          }
+        ]
+      },
+      {
+        "id": "Patient.address.city",
+        "path": "Patient.address.city",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe name of the city, town, suburb, village or other community or delivery center.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nA city, town or village associated with the Address Type.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE02.003",
+            "comment": "City"
+          }
+        ]
+      },
+      {
+        "id": "Patient.address.state",
+        "path": "Patient.address.state",
+        "definition": "BASE RESOURCE DEFINITION:\r\nSub-unit of a country with limited sovereignty in a federally organized country. A code may be used if codes are in common use (e.g. US 2 letter state codes).\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe province/state associated with the Address Type.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE02.004",
+            "comment": "Province/State"
+          }
+        ]
+      },
+      {
+        "id": "Patient.address.postalCode",
+        "path": "Patient.address.postalCode",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA postal code designating a region defined by the postal service.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe postal code or zip code associated with the Address Type.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE02.006",
+            "comment": "Postal/Zip Code"
+          }
+        ]
+      },
+      {
+        "id": "Patient.address.country",
+        "path": "Patient.address.country",
+        "definition": "BASE RESOURCE DEFINITION:\r\nCountry - a nation as commonly understood or generally accepted.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe country associated with the Address Type.",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE02.005",
+            "comment": "Country"
+          }
+        ]
+      },
+      {
+        "id": "Patient.contact.relationship",
+        "path": "Patient.contact.relationship",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe nature of the relationship between the patient and the contact person. \r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe type of a contact person that describes the reason or circumstances under which to contact the person. (e.g., Emergency Contact, Substitute Decision Maker).",
+        "comment": "Not all terminology uses fit this general pattern. In some cases, models should not use CodeableConcept and use Coding directly and provide their own structure for managing text, codings, translations and the relationship between elements and pre- and post-coordination.\r\n\r\nCODE SET TABLE: \r\nCT-014: Contact Purpose",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE03.003",
+            "comment": "Contact Purpose"
+          }
+        ]
+      },
+      {
+        "id": "Patient.contact.name.family",
+        "path": "Patient.contact.name.family",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe part of a name that links to the genealogy. In some cultures (e.g. Eritrea) the family name of a son is the first name of his father.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe contact's surname or family name.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE03.002",
+            "comment": "Contact Last Name"
+          }
+        ]
+      },
+      {
+        "id": "Patient.contact.name.given",
+        "path": "Patient.contact.name.given",
+        "definition": "BASE RESOURCE DEFINITION:\r\nGiven name.\r\n\r\nCDS-S PROFILE DEFINITION :\r\nThe contact's given first name.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE03.001",
+            "comment": "Contact First Name"
+          }
+        ]
+      },
+      {
+        "id": "Patient.contact.telecom.value",
+        "path": "Patient.contact.telecom.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address).\r\n\r\nCDS-S PROFILE DEFINITION (Contact Residence Phone):\r\nThe phone number where the contact person lives. \r\n\r\nCDS-S PROFILE DEFINITION (Contact Cell Phone):\r\nThe cell phone number of the contact person. \r\n\r\nCDS-S PROFILE DEFINITION (Contact Work Phone):\r\nThe organization work phone number  where the contact person can be reached during working hours. \r\n\r\nCDS-S PROFILE DEFINITION (Contact Work Phone Extension):\r\nThe number used to access the contact person's work phone number within an organization. \r\n\r\nCDS-S PROFILE DEFINITION (Contact E-Mail Address):\r\nThe e-mail address preferred by the contact person.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE03.004",
+            "comment": "Contact Residence Phone"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE03.005",
+            "comment": "Contact Cell Phone"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE03.006",
+            "comment": "Contact Work Phone"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE03.007",
+            "comment": "Contact Work Phone Extension"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE03.008",
+            "comment": "Contact E-Mail Address"
+          }
+        ]
+      },
+      {
+        "id": "Patient.communication.language",
+        "path": "Patient.communication.language",
+        "definition": "BASE RESOURCE DEFINITION: \r\nThe ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nOfficial languages are English and French. \r\n\"Patient.communication.preferred\" is required to store and not for display. \r\n\r\nPreferred Official Language: Patient.communication.preferred=FALSE \r\nPreferred Spoken Language: Patient.communication.preferred=TRUE \r\n\r\nMUST SUPPORT Preferred Spoken Language.",
+        "comment": "The structure aa-BB with this exact casing is one the most widely used notations for locale. However not all systems actually code this but instead have it as free text. Hence CodeableConcept instead of code as the data type.\r\n\r\n\r\nCODE SET TABLE: \r\nCT-007: Official Language",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.013",
+            "comment": "Preferred Official Language"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.014",
+            "comment": "Preferred Spoken Langugae"
+          }
+        ]
+      },
+      {
+        "id": "Patient.generalPractitioner",
+        "path": "Patient.generalPractitioner",
+        "definition": "BASE RESOURCE DEFINITION: \r\nPatient's nominated care provider.\r\n\r\nCDS-S PROFILE DEFINITION (Primary Physician): \r\nRefers to the most responsible provider to whom the patient record is assigned. \r\n\r\nBy assigning a patient to a \"Primary Physician\" the patient is becoming part of his/her \"roster lsit\" \r\n\r\nA \"Primary Physician\" might have patients who are on his/her \"roster\" but not on the \"enrolment list\". (Refer to \"Enroled To Physician\" data element.) \r\n\r\nCombining \"Primary Physician\" and \"Enroled to Physician\" in a single field is not an acceptable solution. \r\n\r\nCDS-S PROFILE DEFINITION (Enroled to Physician): \r\nRefers to the physician to whom the patient is enroled as per the MOH enrolment process. \r\n\r\nBy enrolling a patient to a physician, the patient is becoming part of his/her \"enrolment list\" \r\n\r\nCombining \"Enroled to Physician\" and \"Primary Physician\" in a single field is not an acceptable solution.",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Organization",
+              "http://hl7.org/fhir/StructureDefinition/PractitionerRole",
+              "https://simplifier.net/omd-cdss/practitionerprofile"
+            ]
+          }
+        ],
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.015",
+            "comment": "Primary Physician"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.018",
+            "comment": "Enroled to Physician"
+          }
+        ]
+      }
+    ]
+  }
+}

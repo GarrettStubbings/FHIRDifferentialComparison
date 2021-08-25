@@ -1,0 +1,142 @@
+{
+  "resourceType": "ValueSet",
+  "url": "https://loinc.org",
+  "title": "Care Elements Value Set",
+  "status": "draft",
+  "contact": [
+    {
+      "telecom": [
+        {
+          "system": "email",
+          "value": "emr@ontariomd.com"
+        }
+      ],
+      "name": "OMD Specifications Team"
+    }
+  ],
+  "compose": {
+    "include": [
+      {
+        "system": "http://loinc.org",
+        "concept": [
+          {
+            "code": "85354-9",
+            "display": "Blood Pressure Panel"
+          },
+          {
+            "code": "8480-6",
+            "display": "Systolic Blood Pressure"
+          },
+          {
+            "code": "8462-4",
+            "display": "Diastolic Blood Pressure"
+          },
+          {
+            "code": "8867-4",
+            "display": "Heart Rate"
+          },
+          {
+            "code": "8302-2",
+            "display": "Height"
+          },
+          {
+            "code": "29463-7",
+            "display": "Weight"
+          },
+          {
+            "code": "39156-5",
+            "display": "BMI"
+          },
+          {
+            "code": "8280-0",
+            "display": "Waist Circumference"
+          },
+          {
+            "code": "72166-2",
+            "display": "Smoking Status"
+          },
+          {
+            "display": "Smoking Frequency",
+            "code": "72166-2"
+          },
+          {
+            "code": "44940-5",
+            "display": "Alcohol Use"
+          },
+          {
+            "code": "62666-3",
+            "display": "Erectile Function"
+          },
+          {
+            "display": "FEV1  (before puff)",
+            "code": "20157-4"
+          },
+          {
+            "display": "FVC (before puff)",
+            "code": "19876-2"
+          },
+          {
+            "code": "19926-5",
+            "display": "FEV1% (before puff)"
+          },
+          {
+            "display": "FEV1 Predicted",
+            "code": "20156-6"
+          },
+          {
+            "code": "19869-7",
+            "display": "FVC Predicted"
+          },
+          {
+            "code": "19925-7",
+            "display": "FEV1% Predicted"
+          },
+          {
+            "display": "FEV1% of Predicted (before puff)",
+            "code": "20152-5"
+          },
+          {
+            "display": "FVC Ratio  (before puff)",
+            "code": "19871-3"
+          },
+          {
+            "display": "PEF Personal (before puff)",
+            "code": "69975-1"
+          },
+          {
+            "display": "FEV1 (after puff)",
+            "code": "69970-2"
+          },
+          {
+            "display": "FVC (after puff)",
+            "code": "19874-7"
+          },
+          {
+            "display": "FEV1% (after puff)",
+            "code": "69970-2"
+          },
+          {
+            "display": "FVC Ratio (after puff)",
+            "code": "19873-9"
+          },
+          {
+            "display": "PEF Personal (after puff)",
+            "code": "69976-9"
+          },
+          {
+            "code": "2708-6",
+            "display": "O2 Saturation"
+          }
+        ],
+        "version": "2.68"
+      }
+    ]
+  },
+  "description": "LOINC codes used in the CDS-S care elements. Refer to the Spirometry and Vitals observations profiles for mappings of each defined care element.",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>Care Elements Value Set</h2><tt>https://loinc.org</tt><p>LOINC codes used in the CDS-S care elements. Refer to the Spirometry and Vitals observations profiles for mappings of each defined care element.</p></div>"
+  },
+  "publisher": "OMD",
+  "name": "Care_Elements_Value_Set"
+}

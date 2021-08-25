@@ -1,0 +1,79 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "f6dbefc1-5c7c-4c0a-94e7-5b1dec2e1158",
+  "meta": {
+    "lastUpdated": "2021-05-07T13:34:03.839+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/fev1prebronvalue",
+  "name": "FEV1PreBronValue",
+  "title": "Spirometry Care Elements - FEV1 (Before-Puff) - Value",
+  "status": "draft",
+  "date": "2021-03-15T20:31:18.4617458Z",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Quantity",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Quantity",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Quantity.value",
+        "path": "Quantity.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the measured amount. The value includes an implicit precision in the presentation of the value.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nForced Expiratory Volume (FEV) is the volume of air that was exhaled by the patient at the end of the first second of forced expiration - Best of three .",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.021",
+            "comment": "FEV1 (Before-Puff)"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.unit",
+        "path": "Quantity.unit",
+        "fixedString": "L",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.021",
+            "comment": "FEV1 (Before-Puff)"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.system",
+        "path": "Quantity.system",
+        "fixedUri": "http://unitsofmeasure.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.021",
+            "comment": "FEV1 (Before-Puff)"
+          }
+        ]
+      }
+    ]
+  }
+}

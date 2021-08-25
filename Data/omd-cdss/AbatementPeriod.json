@@ -1,0 +1,56 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "3a7c6c25-bdd3-4ef9-8c8f-69dafde86435",
+  "meta": {
+    "lastUpdated": "2021-05-07T11:36:42.407+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/abatementperiod",
+  "name": "AbatementPeriod",
+  "title": "Patient Demographic Elements - Abatement Period",
+  "status": "draft",
+  "date": "2021-03-25T21:21:16.716467+00:00",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Period",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Period",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Period.end",
+        "path": "Period.end",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE06.003",
+            "comment": "Resolution Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE07.003",
+            "comment": "Resolution Date"
+          }
+        ]
+      }
+    ]
+  }
+}

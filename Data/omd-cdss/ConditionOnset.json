@@ -1,0 +1,58 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "7b9e6bbd-2cf1-4733-a496-018a884c43ab",
+  "meta": {
+    "lastUpdated": "2021-05-07T11:42:48.996+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/conditiononset",
+  "name": "ConditionOnset",
+  "title": "Patient Demographic Elements - Condition Onset",
+  "status": "draft",
+  "date": "2021-03-25T21:02:30.1276815Z",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    },
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Period",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Period",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Period.start",
+        "path": "Period.start",
+        "definition": "BASE RESOURCE DEFINITION: \r\nThe start of the period. The boundary is inclusive.\r\n\r\nCDS-S PROFILE DEFINITION (Ongoing Health Conditions - Date of Onset): \r\nThe date when the patient was diagnosed or had symptoms of a problem. \r\n\r\nCDS-S PROFILE DEFINITION (Past Medical and Surgical History - Date of Onset): \r\nThe date when the patient was diagnosed or had symptoms of a problem.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE06.001",
+            "comment": "Date of Onset"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE.07.002",
+            "comment": "Life Stage"
+          }
+        ]
+      }
+    ]
+  }
+}

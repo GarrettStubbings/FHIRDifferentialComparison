@@ -1,0 +1,79 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "5a9d0e69-8962-4d6c-80ca-a866f79c245d",
+  "meta": {
+    "lastUpdated": "2021-05-07T15:34:22.973+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/fvcpostbronvalue",
+  "name": "FVCPostBronValue",
+  "title": "Spirometry Care Elements - FVC (After-Puff) - Value",
+  "status": "draft",
+  "date": "2021-03-17T00:40:07.7575238+00:00",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Quantity",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Quantity",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Quantity.value",
+        "path": "Quantity.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the measured amount. The value includes an implicit precision in the presentation of the value.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nForced Vital Capacity (FVC) is the volume of air that has been forcibly and maximally exhaled out by the patient until no more can be expired.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.043",
+            "comment": "FVC (After-Puff)"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.unit",
+        "path": "Quantity.unit",
+        "fixedString": "L",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.043",
+            "comment": "FVC (After-Puff)"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.system",
+        "path": "Quantity.system",
+        "fixedUri": "http://unitsofmeasure.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.043",
+            "comment": "FVC (After-Puff)"
+          }
+        ]
+      }
+    ]
+  }
+}

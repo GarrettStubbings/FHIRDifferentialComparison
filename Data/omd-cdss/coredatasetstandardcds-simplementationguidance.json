@@ -1,0 +1,140 @@
+{
+  "resourceType": "ImplementationGuide",
+  "url": "https://simplifier.net/guide/coredatasetstandardcds-simplementationguidance",
+  "name": "Core Data Set Standard (CDS-S) Implementation Guidance",
+  "status": "draft",
+  "description": "OMD CDS-S implementation considerations.",
+  "fhirVersion": [
+    "4.0.0"
+  ],
+  "definition": {
+    "page": {
+      "nameUrl": "Home-duplicate-2.md",
+      "title": "Home",
+      "generation": "markdown",
+      "page": [
+        {
+          "nameUrl": "UnmappedCDS-SDataElements.md",
+          "title": "Unmapped CDS-S Data Elements",
+          "generation": "markdown",
+          "page": [
+            {
+              "nameUrl": "PatientStatusDate.md",
+              "title": "Patient Status Date",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "ContactNote.md",
+              "title": "Contact Note",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "ImmunizationType.md",
+              "title": "Immunization Type",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "Long-TermMedication.md",
+              "title": "Long-Term Medication",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "PastMedicationIndicator.md",
+              "title": "Past Medication Indicator",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "PatientCompliance.md",
+              "title": "Patient Compliance",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "ReviewDateTimeLaboratoryTestResults.md",
+              "title": "Review Date/Time (Laboratory Test Results)",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "OffendingAgentDrugCode.md",
+              "title": "Offending Agent Drug Code",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "LifeStage.md",
+              "title": "Life Stage",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "ReviewDateTimeReportsReceived.md",
+              "title": "Review Date/Time (Reports Received)",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "AppointmentNotes.md",
+              "title": "Appointment Notes",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "DrugStrength.md",
+              "title": "Drug Strength",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "OrderingPractitioner.md",
+              "title": "Ordering Practitioner",
+              "generation": "markdown"
+            }
+          ]
+        },
+        {
+          "nameUrl": "Un-identifiedCareElementsLOINCCodes.md",
+          "title": "Un-identified Care Elements LOINC Codes",
+          "generation": "markdown",
+          "page": [
+            {
+              "nameUrl": "FEV1FVCratiobeforepuff.md",
+              "title": "FEV1 / FVC ratio  (before puff)",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "FEV1FVCratioafterpuff.md",
+              "title": "FEV1 / FVC ratio  (after puff)",
+              "generation": "markdown"
+            }
+          ]
+        },
+        {
+          "nameUrl": "CodeSetTables.md",
+          "title": "Code Set Tables",
+          "generation": "markdown",
+          "page": [
+            {
+              "nameUrl": "NameCodeTablesCT-001toCT-005.md",
+              "title": "Name Code Tables (CT-001 to CT-005)",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "PatientDemographicCodeTablesCT-006toCT-016.md",
+              "title": "Patient Demographic Code Tables (CT-006 to CT-016)",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "ImmunizationReactionCodeTablesCT-017toCT-021.md",
+              "title": "Immunization & Reaction Code Tables (CT-017 to CT-021)",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "MedicationCodeTablesCT-022toCT-026.md",
+              "title": "Medication Code Tables (CT-022 to CT-026)",
+              "generation": "markdown"
+            },
+            {
+              "nameUrl": "ReportsFlagsDataTypesCodeTablesCT-027toCT-038.md",
+              "title": "Reports, Flags & Data Types Code Tables (CT-027 to CT-038)",
+              "generation": "markdown"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

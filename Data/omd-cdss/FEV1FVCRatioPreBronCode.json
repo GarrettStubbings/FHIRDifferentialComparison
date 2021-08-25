@@ -1,0 +1,70 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "c52311b9-bd9c-4280-bac2-71b777532b6e",
+  "meta": {
+    "lastUpdated": "2021-05-07T15:29:24.241+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/fev1fvcratioprebroncode",
+  "name": "FEV1FVCRatioPreBronCode",
+  "title": "Spirometry Care Elements - FEV1/FVC Ratio (Before-Puff) - LOINC Code",
+  "status": "draft",
+  "date": "2021-03-17T00:36:20.7838253+00:00",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "orim",
+      "uri": "http://hl7.org/orim",
+      "name": "Ontological RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Coding",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Coding",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Coding.system",
+        "path": "Coding.system",
+        "fixedUri": "http://loinc.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.037",
+            "comment": "FEV1/FVC Ratio (Before-Puff)"
+          }
+        ]
+      },
+      {
+        "id": "Coding.code",
+        "path": "Coding.code",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.037",
+            "comment": "FEV1/FVC Ratio (Before-Puff)"
+          }
+        ]
+      }
+    ]
+  }
+}

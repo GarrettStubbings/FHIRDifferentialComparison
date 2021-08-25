@@ -1,0 +1,79 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "381ac7a8-0aef-45cd-8b66-7cc5c256b586",
+  "meta": {
+    "lastUpdated": "2021-05-07T16:34:54.843+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/pefpersonalprebronvalue",
+  "name": "PEFPersonalPreBronValue",
+  "title": "Spirometry Care Elements - PEF Personal (Before-Puff) - Value",
+  "status": "draft",
+  "date": "2021-03-17T00:37:46.9803313+00:00",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Quantity",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Quantity",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Quantity.value",
+        "path": "Quantity.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the measured amount. The value includes an implicit precision in the presentation of the value.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nPeak Expiratory Flow Rate (PEF) the maximal flow (or speed) achieved during the maximally forced expiration initiated at full inspiration - Best of Three.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.039",
+            "comment": "PEF Personal (Before-Puff)"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.unit",
+        "path": "Quantity.unit",
+        "fixedString": "L/min",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.039",
+            "comment": "PEF Personal (Before-Puff)"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.system",
+        "path": "Quantity.system",
+        "fixedUri": "http://unitsofmeasure.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.039",
+            "comment": "PEF Personal (Before-Puff)"
+          }
+        ]
+      }
+    ]
+  }
+}

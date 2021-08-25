@@ -756,20 +756,20 @@ def display_manual_diff(group, input_file, output_file, meta_data_dict,
     i = 1
     row = 1
     headers = [ig + " Elements" for ig in igs] + ["Reference"]
-    print(headers)
+    #print(headers)
     header_cols = []
     while len(header_cols) < 3:
         column = pyxl.utils.get_column_letter(i)
         cell = worksheet["{0}{1}".format(column, row)]
         if cell.value:
-            print(cell.value)
+            #print(cell.value)
             value = cell.value
             if value in headers:
                 header_cols.append(column)
         i += 1
         if i > 20:
             break
-    print(header_cols)
+    #print(header_cols)
     # now grab everythnig
     element_dict = {}
     row = 2
@@ -787,7 +787,7 @@ def display_manual_diff(group, input_file, output_file, meta_data_dict,
         #print(row_data)
         # if the mapping is possible (e.g. a valid reference) note it
         if row_data[2].lower() == "yes":
-            print("\n Yo We Found a Doable One:",row_data[0], "\n")
+            #print("\n Yo We Found a Doable One:",row_data[0], "\n")
             combined_resource_dicts[igs[1]][row_data[0]] = {"mapping": {
                                                         "identity": "CDSS5.1",
                                                         "map": "Possible"}}
@@ -844,8 +844,7 @@ def display_manual_diff(group, input_file, output_file, meta_data_dict,
         element_classification = big_list[i][1]
         element_status = big_list[i][2]
         ordered_element_names.append(element_name)
-        if "subject" in element_name:
-            print(big_list[i])
+
         element_classification = element_classification + " " + element_status
         element_classifications.append(element_classification)
                     
@@ -879,7 +878,7 @@ if __name__ == '__main__':
                            "View": views[i]}
                       for i, ig in enumerate(igs)}
     
-    resource_lists = get_resources(resource_dirs, preambles, igs)
+    
     
     reduce_cds = True
     
@@ -892,18 +891,18 @@ if __name__ == '__main__':
         os.mkdir('Output/' + output_dir)
     output_dir = 'Output/' + output_dir
     
-    #### RESource level overview stuff
+    #### RESource level overview stuff - Just looking at what's in either IG
     output_file = output_dir + 'ResourceOverview.xlsx'
-    # this one isn't really a mapping, just put together in the CDS 
-    # Documentation
+
     known_mappings = {"DiagnosticReport": {
                         "resources": ["DiagnosticReport", "DocumentManifest"],
                         "classifications": ["shared", igs[1]]}
                       }
+    resource_lists = get_resources(resource_dirs, preambles, igs)
     display_resources(resource_lists, known_mappings, output_file, igs)
     
     
-    # ELement level comparison (HIGH level stuff)
+    # ELement level comparison - look for potential mappings between groups
     element_comparison_folder = get_folder(output_dir, "ElementComparison/")
     
     resource_name_dicts = get_classified_resources(resource_lists, igs)
@@ -924,18 +923,25 @@ if __name__ == '__main__':
     grouped_resource_diff(grouped_resources, meta_data_dict,
                           grouped_mapping_folder, reduce_cds)
     
+    
+    #########################################################################
+    
+    # This is a section for manual mapping as input
+    # Manual mapping will have to be done following appropriate formatting
+    # for any of this to work (See Example On GitHub/Wiki?)
+    
     medication_example = grouped_resources['medication']
     display_manual_diff(medication_example,
-                        ("Output/IPSVsOMD-CDS-S-Reduced/ElementComparison/" +
+                        (output_dir + "ElementComparison/" +
                         "medicationManual.xlsx"),
-                        ("Output/IPSVsOMD-CDS-S-Reduced/ElementComparison/" +
+                        (output_dir + "GroupedMapping/" +
                         "medicationMapped.xlsx"),
                         meta_data_dict)
     
     observation_example = grouped_resources['observation']
     display_manual_diff(observation_example,
-                        ("Output/IPSVsOMD-CDS-S-Reduced/ElementComparison/" +
+                        (output_dir + "ElementComparison/" +
                         "observationManual.xlsx"),
-                        ("Output/IPSVsOMD-CDS-S-Reduced/ElementComparison/" +
+                        (output_dir + "GroupedMapping/" +
                         "observationMapped.xlsx"),
                         meta_data_dict)

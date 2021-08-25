@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="PractitionerRole-uv-ips"/>
+  <url value="http://hl7.org/fhir/uv/ips/StructureDefinition/PractitionerRole-uv-ips"/>
+  <name value="PractitionerRoleUvIps"/>
+  <title value="PractitionerRole (IPS)"/>
+  <status value="active"/>
+  <description value="This profile constrains the PractitionerRole resource to represent a practitioner acting as observer for observattion results for a specified organization."/>
+  <fhirVersion value="4.0.1"/>
+  <kind value="resource"/>
+  <abstract value="false"/>
+  <type value="PractitionerRole"/>
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/PractitionerRole"/>
+  <derivation value="constraint"/>
+  <differential>
+    <element id="PractitionerRole.practitioner">
+      <path value="PractitionerRole.practitioner"/>
+      <type>
+        <code value="Reference"/>
+        <targetProfile value="http://hl7.org/fhir/uv/ips/StructureDefinition/Practitioner-uv-ips"/>
+      </type>
+      <mustSupport value="true"/>
+    </element>
+    <element id="PractitionerRole.organization">
+      <path value="PractitionerRole.organization"/>
+      <type>
+        <code value="Reference"/>
+        <targetProfile value="http://hl7.org/fhir/uv/ips/StructureDefinition/Organization-uv-ips"/>
+      </type>
+      <mustSupport value="true"/>
+    </element>
+		<element id="PractitionerRole.code">
+			<path value="PractitionerRole.code"/>
+			<slicing>
+				<discriminator>
+					<type value="pattern"/>
+					<path value="$this"/>
+				</discriminator>
+				<description value="Discriminated by the bound value set"/>
+				<rules value="open"/>
+			</slicing>
+			<definition value="Roles which this practitioner is authorized to perform for the organization."/>
+			<type>
+				<code value="CodeableConcept"/>
+				<profile value="http://hl7.org/fhir/uv/ips/StructureDefinition/CodeableConcept-uv-ips"/>
+			</type>
+		</element>
+		<element id="PractitionerRole.code:healthcareProfessionalRoles">
+			<path value="PractitionerRole.code"/>
+			<sliceName value="healthcareProfessionalRoles"/>
+			<short value="Healthcare professional role codes from International Standard Classification of Occupations (ISCO)"/>
+			<definition value="Healthcare professional role codes from International Standard Classification of Occupations (ISCO)."/>
+			<binding>
+				<extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName">
+					<valueString value="healthcareProfessionalRoles"/>
+				</extension>
+				<strength value="required"/>
+				<description value="healthcare professional roles"/>
+				<valueSet value="http://hl7.org/fhir/uv/ips/ValueSet/healthcare-professional-roles-uv-ips"/>
+			</binding>
+		</element>
+  </differential>
+</StructureDefinition>

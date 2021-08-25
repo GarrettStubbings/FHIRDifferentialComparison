@@ -1,0 +1,71 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "07814fec-ddde-452c-b4f1-125b3396e0f7",
+  "meta": {
+    "lastUpdated": "2021-05-07T12:59:11.190+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/fev1prebroncode",
+  "name": "FEV1PreBronCode",
+  "title": "Spirometry Care Elements - FEV 1 (Before-Puff) - LOINC Code",
+  "status": "draft",
+  "date": "2021-05-07T12:50:50.3043898+00:00",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "orim",
+      "uri": "http://hl7.org/orim",
+      "name": "Ontological RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Coding",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Coding",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Coding.system",
+        "path": "Coding.system",
+        "fixedUri": "http://loinc.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.021",
+            "comment": "FEV1 (Before-Puff)"
+          }
+        ]
+      },
+      {
+        "id": "Coding.code",
+        "path": "Coding.code",
+        "fixedCode": "20157-4",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.021",
+            "comment": "FEV1 (Before-Puff)"
+          }
+        ]
+      }
+    ]
+  }
+}

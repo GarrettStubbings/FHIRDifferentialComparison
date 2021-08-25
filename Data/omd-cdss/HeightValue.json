@@ -1,0 +1,78 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "951c45cc-999f-4622-9cd7-3f068fcd9ea9",
+  "meta": {
+    "lastUpdated": "2021-05-07T17:26:05.651+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/heightvalue",
+  "name": "HeightValue",
+  "title": "Vitals Care Elements - Height - Value",
+  "status": "draft",
+  "date": "2021-05-07T17:17:59.8141997+00:00",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Quantity",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Quantity",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Quantity.value",
+        "path": "Quantity.value",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.005",
+            "comment": "Height"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.unit",
+        "path": "Quantity.unit",
+        "fixedString": "cm",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.005",
+            "comment": "Height"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.system",
+        "path": "Quantity.system",
+        "fixedUri": "http://unitsofmeasure.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.005",
+            "comment": "Height"
+          }
+        ]
+      }
+    ]
+  }
+}

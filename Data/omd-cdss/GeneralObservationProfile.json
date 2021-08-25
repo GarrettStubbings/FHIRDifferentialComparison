@@ -1,0 +1,335 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "profile-observation3",
+  "meta": {
+    "lastUpdated": "2021-05-07T12:14:35.337+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/generalobservationprofile",
+  "version": "0.2.0",
+  "name": "GeneralObservationProfile",
+  "title": "Observation Profile (General)",
+  "status": "draft",
+  "date": "2021-04-20T00:05:16.4717037+00:00",
+  "publisher": "OMD",
+  "description": "Proposed constraints on the Observation Resource for general use",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "CA",
+          "display": "Canada"
+        },
+        {
+          "system": "http://loinc.org",
+          "version": "T1",
+          "code": "183747",
+          "display": "DHL",
+          "userSelected": false
+        }
+      ]
+    }
+  ],
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation",
+        "path": "Observation",
+        "short": "Observation Profile",
+        "definition": "The Observation Profile is based upon the core FHIR Observation Resource"
+      },
+      {
+        "id": "Observation.status",
+        "path": "Observation.status",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe status of the result value.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe status of the results as provided by the source.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE10.013",
+            "comment": "Test Results Status"
+          }
+        ]
+      },
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "comment": "The binding strength of this element is [Preferred](https://www.hl7.org/fhir/terminologies.html#strength), meaning that codes are encouraged to draw from the LOINC code system for interoperability purposes but are not required to do so to be considered conformant. *All* code-value and, if present, component.code-component.value pairs need to be taken into account to correctly understand the meaning of the observation.",
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "description": "LOINC codes identifying names of simple observations."
+        }
+      },
+      {
+        "id": "Observation.code.coding.system",
+        "path": "Observation.code.coding.system",
+        "fixedUri": "http://loinc.org"
+      },
+      {
+        "id": "Observation.code.coding.code",
+        "path": "Observation.code.coding.code",
+        "code": [
+          {
+            "system": "http://loinc.org",
+            "code": "8992-5",
+            "display": "FEV"
+          },
+          {
+            "system": "http://loinc.org",
+            "code": "8573-3",
+            "display": "FVC1"
+          },
+          {
+            "system": "http://loinc.org",
+            "code": "19925-3",
+            "display": "FEV1/FVC1"
+          }
+        ]
+      },
+      {
+        "id": "Observation.subject",
+        "path": "Observation.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.effective[x]",
+        "path": "Observation.effective[x]",
+        "type": [
+          {
+            "code": "dateTime"
+          },
+          {
+            "code": "Period"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "constraint": [
+          {
+            "key": "ca-baseline-value-1",
+            "severity": "error",
+            "human": "Observation.value[x] or Observation.dataAbsentReason or Observation.component SHOULD be present",
+            "expression": "value[x].exists() or dataAbsentReason.exists() or component.exists()",
+            "xpath": "Observation.value[x] or Observation.dataAbsentReason or Observation.component",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.value[x]:valueQuantity",
+        "path": "Observation.value[x]",
+        "sliceName": "valueQuantity",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ]
+      },
+      {
+        "id": "Observation.value[x]:valueQuantity.unit",
+        "path": "Observation.value[x].unit",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA human-readable form of the unit.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nUnit of measure associated with the test result as provided by the source.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE10.008",
+            "comment": "Result Unit of Measure"
+          }
+        ]
+      },
+      {
+        "id": "Observation.dataAbsentReason",
+        "path": "Observation.dataAbsentReason",
+        "constraint": [
+          {
+            "key": "ca-baseline-value-1",
+            "severity": "error",
+            "human": "Observation.value[x] or Observation.dataAbsentReason or Observation.component SHOULD be present",
+            "expression": "value[x].exists() or dataAbsentReason.exists() or component.exists()",
+            "xpath": "Observation.value[x] or Observation.dataAbsentReason or Observation.component",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.dataAbsentReason.coding.code",
+        "path": "Observation.dataAbsentReason.coding.code",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).\r\n\r\nCDS-S PROFILE DEFINITION:\r\nIndicates whether the test result is considered sensitive information.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE10.022",
+            "comment": "Blocked Test Result"
+          }
+        ]
+      },
+      {
+        "id": "Observation.interpretation.text",
+        "path": "Observation.interpretation.text",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nFlag to indicate a test result is deemed normal, abnormal, unkown or as provided by the source.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE10.012",
+            "comment": "Abnormal Indicator"
+          }
+        ]
+      },
+      {
+        "id": "Observation.note.text",
+        "path": "Observation.note.text",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe text of the annotation in markdown format.\r\n\r\nCDS-S PROFILE DEFINITION (Patient Demographics):\r\nAdditional notes about the patient.\r\n\r\nCDS-S PROFILE DEFINITION (Laboratory Test Results - Lab Notes): \r\nNotes associated with an individual test result as provded by the source. \r\n \r\nCDS-S PROFILE DEFINITION (Laboratory Test Results - Physician Notes): \r\nNotes associated with an individual test result as typed in by a physician in the EMR.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE01.023",
+            "comment": "Patient Note"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE10.016",
+            "comment": "Lab Notes"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE10.017",
+            "comment": "Physician Notes"
+          }
+        ]
+      },
+      {
+        "id": "Observation.referenceRange.low",
+        "path": "Observation.referenceRange.low",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9). If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is <=2.3).\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe lower range limit associated with a test as provided by the source.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE10.009",
+            "comment": "Reference Range Low"
+          }
+        ]
+      },
+      {
+        "id": "Observation.referenceRange.high",
+        "path": "Observation.referenceRange.high",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the high bound of the reference range.  The high bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9). If the high bound is omitted,  it is assumed to be meaningless (e.g. reference range is >= 2.3).\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe upper range limit associated with a test as provided by the laboratory.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE10.010",
+            "comment": "Reference Range High"
+          }
+        ]
+      },
+      {
+        "id": "Observation.referenceRange.text",
+        "path": "Observation.referenceRange.text",
+        "definition": "BASE RESOURCE DEFINITION:\r\nText based reference range in an observation which may be used when a quantitative range is not appropriate for an observation.  An example would be a reference value of \"Negative\" or a list or table of \"normals\".\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe reference rage that cannot be depicted numerically or cannot be parsed as high and low reference range provided by the source.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE10.011",
+            "comment": "Reference Range (Text Based)"
+          }
+        ]
+      },
+      {
+        "id": "Observation.component.code",
+        "path": "Observation.component.code",
+        "comment": "The binding strength of this element is [Preferred](https://www.hl7.org/fhir/terminologies.html#strength), meaning that codes are encouraged to draw from the LOINC code system for interoperability purposes but are not required to do so to be considered conformant. *All* code-value and, if present, component.code-component.value pairs need to be taken into account to correctly understand the meaning of the observation.",
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "description": "LOINC codes identifying names of simple observations."
+        }
+      },
+      {
+        "id": "Observation.component.value[x]",
+        "path": "Observation.component.value[x]",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe information determined as a result of making the observation, if the information has a simple value.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe numeric or qualitative results of a test as provided by the source.",
+        "constraint": [
+          {
+            "key": "ca-baseline-value-2",
+            "severity": "error",
+            "human": "Observation.component.value[x] or Observation.component.dataAbsentReason SHALL be present",
+            "expression": "component.value[x].exists() or component.dataAbsentReason.exists()",
+            "xpath": "Observation.component.value[x] or Observation.component.dataAbsentReason",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE10.007",
+            "comment": "Result Value"
+          }
+        ]
+      },
+      {
+        "id": "Observation.component.dataAbsentReason",
+        "path": "Observation.component.dataAbsentReason",
+        "constraint": [
+          {
+            "key": "ca-baseline-value-2",
+            "severity": "error",
+            "human": "Observation.component.value[x] or Observation.component.dataAbsentReason SHALL be present",
+            "expression": "component.value[x].exists() or component.dataAbsentReason.exists()",
+            "xpath": "Observation.component.value[x] or Observation.component.dataAbsentReason",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+          }
+        ],
+        "mustSupport": true
+      }
+    ]
+  }
+}
