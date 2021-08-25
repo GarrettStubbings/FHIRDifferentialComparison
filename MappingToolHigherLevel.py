@@ -930,18 +930,23 @@ if __name__ == '__main__':
     # Manual mapping will have to be done following appropriate formatting
     # for any of this to work (See Example On GitHub/Wiki?)
     
-    medication_example = grouped_resources['medication']
-    display_manual_diff(medication_example,
-                        (output_dir + "ElementComparison/" +
-                        "medicationManual.xlsx"),
-                        (output_dir + "GroupedMapping/" +
-                        "medicationMapped.xlsx"),
-                        meta_data_dict)
+    if "medicationManual.xlsx" in os.listdir(output_dir +
+                                             "ElementComparison/"):
     
-    observation_example = grouped_resources['observation']
-    display_manual_diff(observation_example,
-                        (output_dir + "ElementComparison/" +
-                        "observationManual.xlsx"),
-                        (output_dir + "GroupedMapping/" +
-                        "observationMapped.xlsx"),
-                        meta_data_dict)
+        medication_example = grouped_resources['medication']
+        display_manual_diff(medication_example,
+                            (output_dir + "ElementComparison/" +
+                            "medicationManual.xlsx"),
+                            (output_dir + "GroupedMapping/" +
+                            "medicationMapped.xlsx"),
+                            meta_data_dict)
+        
+        observation_example = grouped_resources['observation']
+        display_manual_diff(observation_example,
+                            (output_dir + "ElementComparison/" +
+                            "observationManual.xlsx"),
+                            (output_dir + "GroupedMapping/" +
+                            "observationMapped.xlsx"),
+                            meta_data_dict)
+    else:
+        print("No Manual Mapping Found for medication/observation Profiles")
