@@ -20,4 +20,7 @@ To check that it's working you could delete some of the outputs and check that r
 NOTE: There are 2 files (medicationmanual and observationmanual) in the element comparison folder which are required to generate those mappings. The first time you run the MappingToolHigherLevel script it will say something like Missing manual mappings, you will have to copy those manual mappings into the element comparison folder if you want those to work.
   
 # Applying to other IGs
-To get other IGs running you will have to go into the script and change the paths to the resources (e.g. data_dir will be something like Data/CA-Baseline/Input/Resources/). You will also have to change how the files are named (e.g. files could be "structuredefinition-profile-PROFILENAME.json", so preamble would be "structuredefinition-profile-".
+To get other IGs running you will have to go into the script and change the paths to the resources and the IG names (e.g. something like Data/CA-Baseline/Input/Resources/). You will also have to change how the files are named (e.g. files could be "structuredefinition-profile-PROFILENAME.json", so preamble would be "structuredefinition-profile-". This will be up to you to figure out given how your data is downloaded/stored.
+
+# Options
+You can chose to show elements from the snapshot or not by changing the view for the relevant IG (there's a list called views that has elements either "Snapshot" or "Diff"). There's also an option to add dummy parent elements (boolean called add_dummies) which will fill in some of the hierarchy (e.g. if only medication.code.coding.code is in diff, it will show medication.code.coding and medication.code as parents in the output despite them not being in the Diff).
