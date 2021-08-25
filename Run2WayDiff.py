@@ -55,7 +55,7 @@ if __name__ == '__main__':
     # the "Diff" Is supposed to fully represent the resource
     # NOTE that the list is flipped because the comparison is "against" the
     # other implementation guide / base resource
-    inherit_base = [True, False][::-1]
+    inherit_base = [False, True]
     views = ['Snapshot', "Diff"]
     # Adding dummies shows parent elements even if they arent present
     add_dummies = True
