@@ -1,0 +1,70 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "299849f0-8e66-42d1-a18f-7386231988ae",
+  "meta": {
+    "lastUpdated": "2021-05-17T17:15:37.390+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/smokingfrequencycode",
+  "name": "SmokingFrequencyCode",
+  "title": "Vitals Care Elements - Smoking Frequency - LOINC Code",
+  "status": "draft",
+  "date": "2021-05-17T17:06:12.141154+00:00",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "orim",
+      "uri": "http://hl7.org/orim",
+      "name": "Ontological RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Coding",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Coding",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Coding.system",
+        "path": "Coding.system",
+        "fixedUri": "http://loinc.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.015",
+            "comment": "Smoking Frequency"
+          }
+        ]
+      },
+      {
+        "id": "Coding.code",
+        "path": "Coding.code",
+        "fixedCode": "72166-2",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.015",
+            "comment": "Smoking Frequency"
+          }
+        ]
+      }
+    ]
+  }
+}

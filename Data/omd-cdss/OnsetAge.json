@@ -1,0 +1,53 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "24c87b62-5c98-456d-9aca-e12d3a559a95",
+  "meta": {
+    "lastUpdated": "2021-05-07T12:09:55.906+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/onsetage",
+  "name": "OnsetAge",
+  "title": "Family Member History - Onset Age",
+  "status": "draft",
+  "date": "2021-05-07T11:59:19.6454257Z",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Quantity",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Quantity",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Quantity.value",
+        "path": "Quantity.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the measured amount. The value includes an implicit precision in the presentation of the value.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe age of the family member at the onset of the condition.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE05.002",
+            "comment": "Age at Onset"
+          }
+        ]
+      }
+    ]
+  }
+}

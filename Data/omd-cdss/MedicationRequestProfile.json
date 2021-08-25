@@ -1,0 +1,519 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "profile-medicationrequest",
+  "meta": {
+    "lastUpdated": "2021-05-07T12:40:01.502+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/medicationrequestprofile",
+  "version": "0.0.0",
+  "name": "MedicationRequestProfile",
+  "title": "MedicationRequest Profile",
+  "status": "draft",
+  "date": "2021-04-19T14:47:47.1850573+00:00",
+  "publisher": "OMD",
+  "description": "Proposed constraints and extensions on the MedicationRequest resource.  Generated as a first step toward creating a set of Canadian Baseline FHIR profiles.",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "MedicationRequest",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "MedicationRequest",
+        "path": "MedicationRequest",
+        "short": "MedicationRequest Profile",
+        "definition": "The Canadian Baseline MedicationRequest Profile is based upon the core FHIR MedicationRequest Resource"
+      },
+      {
+        "id": "MedicationRequest.identifier.value",
+        "path": "MedicationRequest.identifier.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe portion of the identifier typically relevant to the user and which is unique within the context of the system.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nA unique identifier for the prescription within the EMR.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.023",
+            "comment": "Prescription Identifier"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.status",
+        "path": "MedicationRequest.status",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA code specifying the current state of the order.  Generally, this will be active or completed state.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nDescribes the lifecycle of the prescription (e.g., new, active, suspended).",
+        "comment": "This element is labeled as a modifier because the status contains codes that mark the resource as not currently valid.\r\n\r\nCODE SET TABLE: \r\nCT-035: Prescription Status",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.026",
+            "comment": "Prescription Status"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.intent",
+        "path": "MedicationRequest.intent",
+        "definition": "BASE RESOURCE DEFINITION:\r\nWhether the request is a proposal, plan, or an original order.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nIndicates if a paper copy of the prescription must be viewed before the medication can be dispensed. Whether or not an electronically retrieved prescription is authoritative all by itself is a notion that must be explicitly stated.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.027",
+            "comment": "Non Authoritative Indicator"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.category.text",
+        "path": "MedicationRequest.category.text",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nDescribes the categorization of the treatment (e.g., continuous, one-time).",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.025",
+            "comment": "Treatment Type"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.reported[x]",
+        "path": "MedicationRequest.reported[x]",
+        "type": [
+          {
+            "code": "boolean"
+          },
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitioner",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitionerrole",
+              "http://hl7.org/fhir/StructureDefinition/RelatedPerson",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-organization"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "MedicationRequest.medication[x]",
+        "path": "MedicationRequest.medication[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          },
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-medication"
+            ]
+          }
+        ],
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "description": "TBD. This is a placeholder for a comprehensive valueset, consisting of all Manufactured Product (MP), Non-proprietary Therapeutic Product (NTP) and Therapeutic Moiety (TM) codes, which would be created and maintained by Canada Health Infoway. Medicinal products for prescribing and dispensing in Canada. The content of this subset only contains commonly used medicinal products that are available for prescribing and dispensing in Canada. This content will expand to include all human medicinal products over time.",
+          "valueSet": "https://fhir.infoway-inforoute.ca/ValueSet/prescriptionmedicinalproduct"
+        }
+      },
+      {
+        "id": "MedicationRequest.subject",
+        "path": "MedicationRequest.subject",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "MedicationRequest.encounter",
+        "path": "MedicationRequest.encounter",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-encounter"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.supportingInformation",
+        "path": "MedicationRequest.supportingInformation",
+        "definition": "BASE RESOURCE DEFINITION:\r\nInclude additional information (for example, patient height and weight) that supports the ordering of the medication.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nA unique identifier for a specific protocol or guideline which the prescription has been written in accordance with. Enables the communication of a reference to a protcol, study or guideline ID that is specific to the jurisdiction.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.035",
+            "comment": "Protocol Identifier"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.authoredOn",
+        "path": "MedicationRequest.authoredOn",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe date (and perhaps time) when the prescription was initially written or authored on.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe writtn date of the prescription. This is not the date the prescription was added/inserted into the EMR.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.001",
+            "comment": "Prescription Written Date"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.requester",
+        "path": "MedicationRequest.requester",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitioner",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitionerrole",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-organization",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient",
+              "http://hl7.org/fhir/StructureDefinition/RelatedPerson",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-device"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "MedicationRequest.performer",
+        "path": "MedicationRequest.performer",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe specified desired performer of the medication treatment (e.g. the performer of the medication administration).\r\n\r\nCDS-S PROFILE DEFINITION (Prescribed  by Name):\r\nThe First Name and Last Name of the prescriber. \r\n\r\nCDS-S PROFILE DEFINITION (Prescribed by Name):\r\nThe \"OHIP Billing Number\" number of the prescriber.",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitioner",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitionerrole",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-organization",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-device",
+              "http://hl7.org/fhir/StructureDefinition/RelatedPerson",
+              "http://hl7.org/fhir/StructureDefinition/CareTeam"
+            ]
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.021",
+            "comment": "Prescribed by Name"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.022",
+            "comment": "Prescribed by Identifier"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.recorder",
+        "path": "MedicationRequest.recorder",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitioner",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitionerrole"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.reasonCode.coding.code",
+        "path": "MedicationRequest.reasonCode.coding.code",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).\r\n\r\nCDS-S PROFILE DEFINITION:\r\nA coded form of the problem that is the reason for the current prescription. Facilities cross-checking the use of a therapy against its indication.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.034",
+            "comment": "Problem Code"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.reasonReference",
+        "path": "MedicationRequest.reasonReference",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-condition",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.basedOn",
+        "path": "MedicationRequest.basedOn",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/CarePlan",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-medicationrequest",
+              "http://hl7.org/fhir/StructureDefinition/ServiceRequest",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-immunizationrecommendation"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.note.text",
+        "path": "MedicationRequest.note.text",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe text of the annotation in markdown format.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nNotes the provider adds to the prescription that are not visible on the printed prescription.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.019",
+            "comment": "Notes"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.dosageInstruction",
+        "path": "MedicationRequest.dosageInstruction",
+        "mustSupport": true
+      },
+      {
+        "id": "MedicationRequest.dosageInstruction.text",
+        "path": "MedicationRequest.dosageInstruction.text",
+        "mustSupport": true
+      },
+      {
+        "id": "MedicationRequest.dosageInstruction.patientInstruction",
+        "path": "MedicationRequest.dosageInstruction.patientInstruction",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.020",
+            "comment": "Prescription Instructions"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.dosageInstruction.timing",
+        "path": "MedicationRequest.dosageInstruction.timing",
+        "definition": "BASE RESOURCE DEFINITION:\r\nWhen medication should be administered.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe frequency by which the prescribed medication is to be consumed.",
+        "comment": "This attribute might not always be populated while the Dosage.text is expected to be populated.  If both are populated, then the Dosage.text should reflect the content of the Dosage.timing.\r\n\r\nCODE SET TABLE: \r\nCT-024 Medication Frequency",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.010",
+            "comment": "Frequency"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.dosageInstruction.route",
+        "path": "MedicationRequest.dosageInstruction.route",
+        "definition": "BASE RESOURCE DEFINITION:\r\nHow drug should enter body.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe means by which the dispensed drug is to be administered to the patient. Can be the route of the administration as suggested by the manufacturer and provided by the EMR's Drug Database or as typed in by the provider.",
+        "comment": "Not all terminology uses fit this general pattern. In some cases, models should not use CodeableConcept and use Coding directly and provide their own structure for managing text, codings, translations and the relationship between elements and pre- and post-coordination.\r\n\r\nCODE SET TABLE: \r\nCT-022: Medication and Immunization Route",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.009",
+            "comment": "Route"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.dosageInstruction.doseAndRate",
+        "path": "MedicationRequest.dosageInstruction.doseAndRate",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe amount of medication administered.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nDose amount and unit of measure of the medication intended to be consumed during a single administration as prescribed by the provider. The dosage is characterized by a numeric value and an associated unit of measure. \r\n\r\nExamples: 1 tsp, 2 tabs.",
+        "comment": "CODE SET TABLE: \r\n\r\nCT-026: Medication - Dosage Unit of Measure",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.007",
+            "comment": "Dosage"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.dispenseRequest.initialFill.quantity",
+        "path": "MedicationRequest.dispenseRequest.initialFill.quantity",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe amount or quantity to provide as part of the first dispense.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe quantity of medication to be dispensed for the first administration of the prescription (inital dispense).",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.013",
+            "comment": "Quantity"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.dispenseRequest.initialFill.duration",
+        "path": "MedicationRequest.dispenseRequest.initialFill.duration",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe length of time that the first dispense is expected to last.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe duration of medication to be dispensed for the first administration of the prescription (initial dispense).",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.011",
+            "comment": "Duration"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.dispenseRequest.dispenseInterval",
+        "path": "MedicationRequest.dispenseRequest.dispenseInterval",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe minimum period of time that must occur between dispenses of the medication.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nIndicates the minimum amount of time that must occur between dispenses.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.028",
+            "comment": "Dispense Interval"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.dispenseRequest.validityPeriod.start",
+        "path": "MedicationRequest.dispenseRequest.validityPeriod.start",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe start of the period. The boundary is inclusive.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe start date of the prescription.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.002",
+            "comment": "Start Date"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.dispenseRequest.numberOfRepeatsAllowed",
+        "path": "MedicationRequest.dispenseRequest.numberOfRepeatsAllowed",
+        "definition": "BASE RESOURCE DEFINITION:\r\nAn integer indicating the number of times, in addition to the original dispense, (aka refills or repeats) that the patient can receive the prescribed medication. Usage Notes: This integer does not include the original order dispense. This means that if an order indicates dispense 30 tablets plus \"3 repeats\", then the order can be dispensed a total of 4 times and the patient can receive a total of 120 tablets.  A prescriber may explicitly say that zero refills are permitted after the initial dispense.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe subsequent fills that follow the initial dispense of the prescription.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.015",
+            "comment": "Number of Refills/Repeats"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.dispenseRequest.quantity",
+        "path": "MedicationRequest.dispenseRequest.quantity",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe amount that is to be dispensed for one fill.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe quantity of medication to be dispensed for the refills of the prescription. Supports the use cases when refill quantity differs from initial dispense.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.014",
+            "comment": "Refill Quantity"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.dispenseRequest.expectedSupplyDuration",
+        "path": "MedicationRequest.dispenseRequest.expectedSupplyDuration",
+        "definition": "BASE RESOURCE DEFINITION:\r\nIdentifies the period time over which the supplied product is expected to be used, or the length of time the dispense is expected to last.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe duration of medication to be dispensed for the refills of the prescription. Supports the use cases when refill duration differs from initial dispense.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.012",
+            "comment": "Refill Duration"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.dispenseRequest.performer",
+        "path": "MedicationRequest.dispenseRequest.performer",
+        "definition": "BASE RESOURCE DEFINITION:\r\nIndicates the intended dispensing Organization specified by the prescriber.\r\n\r\nCDS-S PROFILE DEFINITION (Target Dispensing Facility - Service Location Address):\r\nIdentifies the physical location of a dispensing service location and also allows for the location to be contacted. \r\n\r\nCDS-S PROFILE DEFINITION (Target Dispensing Facility - Service Location Name):\r\nThe name assigned to the dispensing service location. Used for human communication, and for cross-checking of the Targeted Dispensing Facility - Service Location Identifier. \r\n\r\nCDS-S PROFILE DEFINITION (Target Dispensing Facility - Service Location Identifier):\r\nUnique identifier for a dispensing location. Allows for lookup and retrieval of detailed information about a specific service location. Also ensures unique identification of service location.",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-organization"
+            ]
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.030",
+            "comment": "Target Dispensing Facility - Service Location Address"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.031",
+            "comment": "Target Dispensing Facility - Service Location Name"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.032",
+            "comment": "Target Dispensing Facility - Service Location Identifier"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.substitution.allowed[x]",
+        "path": "MedicationRequest.substitution.allowed[x]",
+        "definition": "BASE RESOURCE DEFINITION:\r\nTrue if the prescriber allows a different drug to be dispensed from what was prescribed.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nA prescribers instruction that a specific prescribed product must be dispensed as-is, or not.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.029",
+            "comment": "Substitution Not Allowed"
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.priorPrescription",
+        "path": "MedicationRequest.priorPrescription",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA link to a resource representing an earlier order related order or prescription.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nA reference to a previous prescription which the current prescription replaces.",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-medicationrequest"
+            ]
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE09.024",
+            "comment": "Prior Prescription Reference"
+          }
+        ]
+      }
+    ]
+  }
+}

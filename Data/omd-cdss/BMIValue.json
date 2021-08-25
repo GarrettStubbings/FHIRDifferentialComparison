@@ -1,0 +1,66 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "7a88cbaa-d246-4bf6-9351-ef8e35b39777",
+  "meta": {
+    "lastUpdated": "2021-05-07T16:52:55.116+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/bmivalue",
+  "name": "BMIValue",
+  "title": "Vitals Care Elements - BMI - Value",
+  "status": "draft",
+  "date": "2021-05-07T16:45:26.1786389+00:00",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Quantity",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Quantity",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Quantity.value",
+        "path": "Quantity.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the measured amount. The value includes an implicit precision in the presentation of the value.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe Body Mass Index (BMI) automatically calculated by the EMR system, based on the Height and Weight recorded by the provider.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.009",
+            "comment": "BMI"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.unit",
+        "path": "Quantity.unit",
+        "fixedString": "kg/m2",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.009",
+            "comment": "BMI"
+          }
+        ]
+      }
+    ]
+  }
+}

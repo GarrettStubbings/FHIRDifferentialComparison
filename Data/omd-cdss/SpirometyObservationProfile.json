@@ -1,0 +1,546 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "profile-spirometry",
+  "meta": {
+    "lastUpdated": "2021-05-18T14:31:59.806+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/spirometyobservationprofile",
+  "version": "0.2.0",
+  "name": "SpirometyObservationProfile",
+  "title": "Observation Profile (Spirometry)",
+  "status": "draft",
+  "date": "2021-05-18T14:21:00.4921281+00:00",
+  "publisher": "OMD",
+  "description": "Proposed constraints on the Observation Resource for general use on spirometry care elements.",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "CA",
+          "display": "Canada"
+        }
+      ]
+    }
+  ],
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation",
+        "path": "Observation",
+        "short": "Observation Profile",
+        "definition": "The Observation Profile is based upon the core FHIR Observation Resource"
+      },
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "profile",
+              "path": "resolve()"
+            }
+          ],
+          "rules": "open"
+        },
+        "comment": "The binding strength of this element is [Preferred](https://www.hl7.org/fhir/terminologies.html#strength), meaning that codes are encouraged to draw from the LOINC code system for interoperability purposes but are not required to do so to be considered conformant. *All* code-value and, if present, component.code-component.value pairs need to be taken into account to correctly understand the meaning of the observation.",
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "description": "LOINC codes identifying names of simple observations."
+        }
+      },
+      {
+        "id": "Observation.code.coding",
+        "path": "Observation.code.coding",
+        "type": [
+          {
+            "code": "Coding",
+            "profile": [
+              "https://simplifier.net/omd-cdss/fev1prebroncode",
+              "https://simplifier.net/omd-cdss/fvcprebroncode",
+              "https://simplifier.net/omd-cdss/fev1perprebroncode",
+              "https://simplifier.net/omd-cdss/fev1predictedcode",
+              "https://simplifier.net/omd-cdss/fvcpredictedcode",
+              "https://simplifier.net/omd-cdss/fev1perpredictedcode",
+              "https://simplifier.net/omd-cdss/fev1perofpredictedprebroncode",
+              "https://simplifier.net/omd-cdss/fvcratioprebroncode",
+              "https://simplifier.net/omd-cdss/fev1fvcratioprebroncode",
+              "https://simplifier.net/omd-cdss/pefpersonalprebroncode",
+              "https://simplifier.net/omd-cdss/fev1postbroncode",
+              "https://simplifier.net/omd-cdss/fvcpostbroncode",
+              "https://simplifier.net/omd-cdss/fev1perpostbroncode",
+              "https://simplifier.net/omd-cdss/fev1perofpredictedpostbroncode",
+              "https://simplifier.net/omd-cdss/fvcratiopostbroncode",
+              "https://simplifier.net/omd-cdss/fev1fvcratiopostbroncode",
+              "https://simplifier.net/omd-cdss/pefpersonalpostbroncode",
+              "https://simplifier.net/omd-cdss/o2saturationcode"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Observation.code.coding.system",
+        "path": "Observation.code.coding.system",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.021",
+            "comment": "FEV1 (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.023",
+            "comment": "FVC (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.025",
+            "comment": "FEV1% (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.027",
+            "comment": "FEV1 Predicted"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.029",
+            "comment": "FVC Predicted"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.031",
+            "comment": "FEV1% Prediced"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.033",
+            "comment": "FEV1% of Predicted (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.035",
+            "comment": "FVC Ratio (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.037",
+            "comment": "FEV1/FVC Ratio (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.039",
+            "comment": "PEF Personal (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.041",
+            "comment": "FEV1 (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.043",
+            "comment": "FVC (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.045",
+            "comment": "FEV1% (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.047",
+            "comment": "FEV1% of Predicted (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.049",
+            "comment": "FVC Ratio (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.051",
+            "comment": "FEV1/FVC Ratio (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.053",
+            "comment": "PEF Personal (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.056",
+            "comment": "O2 Saturation"
+          }
+        ]
+      },
+      {
+        "id": "Observation.code.coding.code",
+        "path": "Observation.code.coding.code",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.021",
+            "comment": "FEV1 (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.023",
+            "comment": "FVC (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.025",
+            "comment": "FEV1% (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.027",
+            "comment": "FEV1 Predicted"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.029",
+            "comment": "FVC Predicted"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.031",
+            "comment": "FEV1% Predicted"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.033",
+            "comment": "FEV1% of Predicted (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.035",
+            "comment": "FVC Ratio (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.037",
+            "comment": "FEV1/FVC Ratio (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.039",
+            "comment": "PEF Personal (Before-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.041",
+            "comment": "FEV1 (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.043",
+            "comment": "FVC (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.045",
+            "comment": "FEV1% (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.047",
+            "comment": "FEV1% of Predicted (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.049",
+            "comment": "FVC Ratio (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.051",
+            "comment": "FEV1/FVC Ratio (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.053",
+            "comment": "PEF Personal (After-Puff)"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.055",
+            "comment": "O2 Saturation"
+          }
+        ]
+      },
+      {
+        "id": "Observation.subject",
+        "path": "Observation.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://simplifier.net/omd-cdss/patientprofile"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.effective[x]",
+        "path": "Observation.effective[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "definition": "BASE RESOURCE DEFINITION: \r\nThe time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \"physiologically relevant time\". This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself.",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.effective[x]:effectiveDateTime",
+        "path": "Observation.effective[x]",
+        "sliceName": "effectiveDateTime",
+        "definition": "BASE RESOURCE DEFINITION: \r\nThe time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \"physiologically relevant time\". This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe date the observation was measured.",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.022",
+            "comment": "FEV1 (Before Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.024",
+            "comment": "FVC (Before Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.026",
+            "comment": "FEV1% (Before Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.028",
+            "comment": "FEV1 Predicted - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.030",
+            "comment": "FVC Predicted (Before Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.032",
+            "comment": "FEV1% Predicted - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.034",
+            "comment": "FEV1% of Predicted (Before Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.036",
+            "comment": "FVC Ratio (Before Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.038",
+            "comment": "FEV1/FVC Ratio (Before Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.040",
+            "comment": "PEF Personal (Before Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.042",
+            "comment": "FEV1 (After Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.044",
+            "comment": "FVC (After Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.046",
+            "comment": "FEV1% (After Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.048",
+            "comment": "FEV1% of Predicted (After Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.050",
+            "comment": "FVC Ratio (After Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.052",
+            "comment": "FEV1/FVC Ratio (After Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.054",
+            "comment": "PEF Personal (After Puff) - Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.056",
+            "comment": "O2 Saturation - Date"
+          }
+        ]
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "profile",
+              "path": "resolve()"
+            }
+          ],
+          "rules": "open"
+        },
+        "constraint": [
+          {
+            "key": "ca-baseline-value-1",
+            "severity": "error",
+            "human": "Observation.value[x] or Observation.dataAbsentReason or Observation.component SHOULD be present",
+            "expression": "value[x].exists() or dataAbsentReason.exists() or component.exists()",
+            "xpath": "Observation.value[x] or Observation.dataAbsentReason or Observation.component",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.value[x]:valueQuantity",
+        "path": "Observation.valueQuantity",
+        "sliceName": "valueQuantity",
+        "type": [
+          {
+            "code": "Quantity",
+            "profile": [
+              "https://simplifier.net/omd-cdss/fev1prebronvalue",
+              "https://simplifier.net/omd-cdss/fev1perofpredictedprebronvalue",
+              "https://simplifier.net/omd-cdss/fev1predictedvalue",
+              "https://simplifier.net/omd-cdss/fev1perofpredictedprebronvalue",
+              "https://simplifier.net/omd-cdss/fev1perofpredictedpostbronvalue",
+              "https://simplifier.net/omd-cdss/fev1fvcratioprebronvalue",
+              "https://simplifier.net/omd-cdss/fvcprebronvalue",
+              "https://simplifier.net/omd-cdss/fev1perprebronvalue",
+              "https://simplifier.net/omd-cdss/fev1perpredictedvalue",
+              "https://simplifier.net/omd-cdss/fvcratioprebronvalue",
+              "https://simplifier.net/omd-cdss/fvcpredictedvalue",
+              "https://simplifier.net/omd-cdss/pefpersonalprebronvalue",
+              "https://simplifier.net/omd-cdss/fev1perpostbronvalue",
+              "https://simplifier.net/omd-cdss/fvcpostbronvalue",
+              "https://simplifier.net/omd-cdss/fev1fvcratiopostbronvalue",
+              "https://simplifier.net/omd-cdss/fvcratiopostbronvalue",
+              "https://simplifier.net/omd-cdss/pefpersonalpostbronvalue",
+              "https://simplifier.net/omd-cdss/o2saturationvalue"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Observation.dataAbsentReason",
+        "path": "Observation.dataAbsentReason",
+        "constraint": [
+          {
+            "key": "ca-baseline-value-1",
+            "severity": "error",
+            "human": "Observation.value[x] or Observation.dataAbsentReason or Observation.component SHOULD be present",
+            "expression": "value[x].exists() or dataAbsentReason.exists() or component.exists()",
+            "xpath": "Observation.value[x] or Observation.dataAbsentReason or Observation.component",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component.code",
+        "path": "Observation.component.code",
+        "comment": "The binding strength of this element is [Preferred](https://www.hl7.org/fhir/terminologies.html#strength), meaning that codes are encouraged to draw from the LOINC code system for interoperability purposes but are not required to do so to be considered conformant. *All* code-value and, if present, component.code-component.value pairs need to be taken into account to correctly understand the meaning of the observation.",
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "description": "LOINC codes identifying names of simple observations."
+        }
+      },
+      {
+        "id": "Observation.component.value[x]",
+        "path": "Observation.component.value[x]",
+        "constraint": [
+          {
+            "key": "ca-baseline-value-2",
+            "severity": "error",
+            "human": "Observation.component.value[x] or Observation.component.dataAbsentReason SHALL be present",
+            "expression": "component.value[x].exists() or component.dataAbsentReason.exists()",
+            "xpath": "Observation.component.value[x] or Observation.component.dataAbsentReason",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component.dataAbsentReason",
+        "path": "Observation.component.dataAbsentReason",
+        "constraint": [
+          {
+            "key": "ca-baseline-value-2",
+            "severity": "error",
+            "human": "Observation.component.value[x] or Observation.component.dataAbsentReason SHALL be present",
+            "expression": "component.value[x].exists() or component.dataAbsentReason.exists()",
+            "xpath": "Observation.component.value[x] or Observation.component.dataAbsentReason",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.value",
+        "path": "Observation.value",
+        "definition": "The value of the measured amount. The value includes an implicit precision in the presentation of the value."
+      }
+    ]
+  }
+}

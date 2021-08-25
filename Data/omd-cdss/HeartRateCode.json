@@ -1,0 +1,71 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "4abead12-48b7-4cdc-83d1-30923b604dc7",
+  "meta": {
+    "lastUpdated": "2021-05-07T17:20:27.746+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/heartratecode",
+  "name": "HeartRateCode",
+  "title": "Vitals Care Elements - Heart Rate - LOINC Code",
+  "status": "draft",
+  "date": "2021-05-07T17:12:30.4124311+00:00",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "orim",
+      "uri": "http://hl7.org/orim",
+      "name": "Ontological RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Coding",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Coding",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Coding.system",
+        "path": "Coding.system",
+        "fixedUri": "http://loinc.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.003",
+            "comment": "Heart Rate"
+          }
+        ]
+      },
+      {
+        "id": "Coding.code",
+        "path": "Coding.code",
+        "fixedCode": "8867-4",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.003",
+            "comment": "Heart Rate"
+          }
+        ]
+      }
+    ]
+  }
+}

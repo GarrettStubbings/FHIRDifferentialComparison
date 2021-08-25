@@ -1,0 +1,176 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "profile-practitioner",
+  "meta": {
+    "lastUpdated": "2021-05-07T12:45:46.423+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/practitionerprofile",
+  "version": "0.0.1",
+  "name": "PractitionerProfile",
+  "title": "Practitioner Profile",
+  "status": "draft",
+  "date": "2021-04-19T13:52:32.444041+00:00",
+  "publisher": "OMD",
+  "description": "Proposed constraints and extensions on the Practitioner Resource for general use.",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Practitioner",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Practitioner",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Practitioner",
+        "path": "Practitioner",
+        "short": "Practitioner Profile",
+        "definition": "The Practitioner Profile is based upon the core FHIR Practitioner Resource"
+      },
+      {
+        "id": "Practitioner.identifier",
+        "path": "Practitioner.identifier",
+        "mustSupport": true
+      },
+      {
+        "id": "Practitioner.identifier.system",
+        "path": "Practitioner.identifier.system",
+        "min": 1
+      },
+      {
+        "id": "Practitioner.identifier.value",
+        "path": "Practitioner.identifier.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe portion of the identifier typically relevant to the user and which is unique within the context of the system.\r\n\r\nCDS-S PROFILE DEFINITION (OHIP Billing Number): \r\nThe unique number assigned to a physician by the MOH that allows the Ministry to calculate and direct payment for claims submitted under the number. \r\n\r\nCDS-S PROFILE DEFINITION (CPSO Number): \r\nThe five- or six digit unique identifier number assigned by CPSO to physicians, allowing them to practice medicine in Ontario. \r\n\r\nCDS-S PROFILE DEFINITION (CNO Number): \r\nThe sever -or eight digit unique identifier number assigned by CNO to registered nurses (RNs) and registered practical nurses (RPNs) in Ontario.",
+        "min": 1,
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE04.004",
+            "comment": "OHIP Billing Number"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE04.005",
+            "comment": "CPSO Number"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE04.006",
+            "comment": "CNO Number"
+          }
+        ]
+      },
+      {
+        "id": "Practitioner.name",
+        "path": "Practitioner.name",
+        "constraint": [
+          {
+            "key": "ca-baseline-name",
+            "severity": "error",
+            "human": "Practitioner.name.given or Practitioner.name.family or both SHALL be present",
+            "expression": "family.exists() or given.exists()",
+            "xpath": "f:given or f:family",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitioner"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Practitioner.name.family",
+        "path": "Practitioner.name.family",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe part of a name that links to the genealogy. In some cultures (e.g. Eritrea) the family name of a son is the first name of his father.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe provider's surname or family name.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE04.002",
+            "comment": "Provider Last Name"
+          }
+        ]
+      },
+      {
+        "id": "Practitioner.name.given",
+        "path": "Practitioner.name.given",
+        "definition": "BASE RESOURCE DEFINITION:\r\nGiven name.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe provider's first given name.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE04.001",
+            "comment": "Provider First Name"
+          }
+        ]
+      },
+      {
+        "id": "Practitioner.telecom",
+        "path": "Practitioner.telecom",
+        "mustSupport": true
+      },
+      {
+        "id": "Practitioner.address.extension",
+        "path": "Practitioner.address.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Practitioner.address.extension:preferred",
+        "path": "Practitioner.address.extension",
+        "sliceName": "preferred",
+        "short": "HL7 Preferred Address Flag extension",
+        "definition": "Flag denoting whether parent address item is preferred",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/iso21090-preferred"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Practitioner.birthDate",
+        "path": "Practitioner.birthDate",
+        "mustSupport": true
+      },
+      {
+        "id": "Practitioner.qualification",
+        "path": "Practitioner.qualification",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe official certifications, training, and licenses that authorize or otherwise pertain to the provision of care by the practitioner.  For example, a medical license issued by a medical board authorizing the practitioner to practice medicine within a certian locality.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe Medical Discipline to which the provider belongs.",
+        "comment": "CODE SET TABLE: \r\nCT-015: Healthcare Practitioner Type",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE04.003",
+            "comment": "Provider Role"
+          }
+        ]
+      },
+      {
+        "id": "Practitioner.qualification.code.coding.system",
+        "path": "Practitioner.qualification.code.coding.system",
+        "short": "QualifiedRoleType",
+        "definition": "A code system for the degree or educational rank that the credential specifies. May also apply to an Expertise type.",
+        "comment": "The binding strength of this element is [Preferred](https://www.hl7.org/fhir/terminologies.html#strength), meaning that codes are encouraged to draw from the QualifiedRoleType code system for interoperability purposes but are not required to do so to be considered conformant.",
+        "binding": {
+          "strength": "preferred",
+          "description": "A code system for the degree or educational rank that the credential specifies",
+          "valueSet": "http://fhir.infoway-inforoute.ca/CodeSystem/scpqual"
+        }
+      }
+    ]
+  }
+}

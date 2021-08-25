@@ -1,0 +1,78 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "080d4d82-971f-482f-885e-28686c92729c",
+  "meta": {
+    "lastUpdated": "2021-05-07T17:03:36.373+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/diastolicbpvalue",
+  "name": "DiastolicBPValue",
+  "title": "Vitals Care Elements - Diastolic Blood Pressure - Value",
+  "status": "draft",
+  "date": "2021-05-07T16:55:35.5374068+00:00",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Quantity",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Quantity",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Quantity.value",
+        "path": "Quantity.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the measured amount. The value includes an implicit precision in the presentation of the value.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe diastolic blood pressure as measured by the provider.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.unit",
+        "path": "Quantity.unit",
+        "fixedString": "mm[Hg]",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.system",
+        "path": "Quantity.system",
+        "fixedUri": "http://unitsofmeasure.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.001",
+            "comment": "Blood Pressure"
+          }
+        ]
+      }
+    ]
+  }
+}

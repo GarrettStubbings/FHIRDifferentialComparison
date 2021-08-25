@@ -1,0 +1,66 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "0619f89f-0226-42c0-ae64-0c8e9690b1d7",
+  "meta": {
+    "lastUpdated": "2021-05-07T15:26:07.677+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/fev1fvcratiopostbronvalue",
+  "name": "FEV1FVCRatioPostBronValue",
+  "title": "Spirometry Care Elements - FEV1/FVC Ratio (After-Puff) - Value",
+  "status": "draft",
+  "date": "2021-03-17T00:45:24.3868127+00:00",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Quantity",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Quantity",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Quantity.value",
+        "path": "Quantity.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the measured amount. The value includes an implicit precision in the presentation of the value.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nFEV1 / FVC (After-Puff) actual divided by FEV1 / FVC predicted.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.051",
+            "comment": "FEV1/FVC Ratio (After-Puff)"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.unit",
+        "path": "Quantity.unit",
+        "fixedString": "%",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.051",
+            "comment": "FEV1/FVC Ratio (After-Puff)"
+          }
+        ]
+      }
+    ]
+  }
+}

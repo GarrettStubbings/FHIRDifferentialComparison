@@ -1,0 +1,53 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "6992b3b8-de81-4f1c-964b-b111937acc66",
+  "meta": {
+    "lastUpdated": "2021-05-07T17:13:14.617+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/erectilefunctionvalue",
+  "name": "ErectileFunctionValue",
+  "title": "Vitals Care Elements - Erectile Function - Value",
+  "status": "draft",
+  "date": "2021-05-07T16:58:21.4721123+00:00",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Quantity",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Quantity",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Quantity.value",
+        "path": "Quantity.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the measured amount. The value includes an implicit precision in the presentation of the value.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nRecords whether the \"erectile function\" is normal or abnormal.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.019",
+            "comment": "Erectile Function"
+          }
+        ]
+      }
+    ]
+  }
+}

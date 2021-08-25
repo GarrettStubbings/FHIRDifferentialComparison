@@ -1,0 +1,70 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "a045eedc-7f1e-4c36-b306-0e134ff580bc",
+  "meta": {
+    "lastUpdated": "2021-05-07T16:32:24.422+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/pefpersonalpostbroncode",
+  "name": "PEFPersonalPostBronCode",
+  "title": "Spirometry Care Elements - PEF Personal (After-Puff) - LOINC Code",
+  "status": "draft",
+  "date": "2021-03-17T00:45:42.8392494+00:00",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "orim",
+      "uri": "http://hl7.org/orim",
+      "name": "Ontological RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Coding",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Coding",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Coding.system",
+        "path": "Coding.system",
+        "fixedUri": "http://loinc.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.053",
+            "comment": "PEF Personal (After-Puff)"
+          }
+        ]
+      },
+      {
+        "id": "Coding.code",
+        "path": "Coding.code",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.053",
+            "comment": "PEF Personal (After-Puff)"
+          }
+        ]
+      }
+    ]
+  }
+}

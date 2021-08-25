@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema targetNamespace="http://hl7.org/fhir" elementFormDefault="qualified" xmlns="http://hl7.org/fhir" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="StructureDefinition">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="url">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:anyURI"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="name">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="title">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="status">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="description">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="purpose">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="kind">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="abstract">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:boolean"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="type">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="baseDefinition">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:anyURI"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="derivation">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="differential">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="element" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="path">
+											<xs:complexType>
+												<xs:attribute name="value" use="required" type="xs:string"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:choice>
+											<xs:sequence>
+												<xs:element name="slicing">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="discriminator">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="type">
+																			<xs:complexType>
+																				<xs:attribute name="value" use="required" type="xs:string"/>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="path">
+																			<xs:complexType>
+																				<xs:attribute name="value" use="required" type="xs:string"/>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="description">
+																<xs:complexType>
+																	<xs:attribute name="value" use="required" type="xs:string"/>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="rules">
+																<xs:complexType>
+																	<xs:attribute name="value" use="required" type="xs:string"/>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:choice>
+													<xs:sequence>
+														<xs:element name="min" type="T4_min"/>
+														<xs:element name="max" type="T4_max"/>
+														<xs:element name="type" type="T4_type"/>
+														<xs:element name="mustSupport" type="T4_mustSupport"/>
+														<xs:element name="binding" type="T4_binding"/>
+													</xs:sequence>
+													<xs:sequence>
+														<xs:element name="type" type="T4_type"/>
+														<xs:element name="mustSupport" type="T4_mustSupport"/>
+													</xs:sequence>
+												</xs:choice>
+											</xs:sequence>
+											<xs:sequence>
+												<xs:element name="sliceName">
+													<xs:complexType>
+														<xs:attribute name="value" use="required" type="xs:string"/>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="short">
+													<xs:complexType>
+														<xs:attribute name="value" use="required" type="xs:string"/>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="definition">
+													<xs:complexType>
+														<xs:attribute name="value" use="required" type="xs:string"/>
+													</xs:complexType>
+												</xs:element>
+												<xs:choice>
+													<xs:sequence>
+														<xs:element name="max" type="T4_max"/>
+														<xs:element name="type" type="T4_type"/>
+														<xs:element name="mustSupport" type="T4_mustSupport"/>
+													</xs:sequence>
+													<xs:sequence>
+														<xs:element name="type" type="T4_type"/>
+														<xs:element name="min" type="T4_min"/>
+														<xs:element name="max" type="T4_max"/>
+														<xs:element name="mustSupport" type="T4_mustSupport"/>
+														<xs:element name="binding" type="T4_binding"/>
+													</xs:sequence>
+												</xs:choice>
+											</xs:sequence>
+											<xs:sequence>
+												<xs:choice minOccurs="0">
+													<xs:sequence>
+														<xs:element name="comment" minOccurs="0">
+															<xs:complexType>
+																<xs:attribute name="value" use="required" type="xs:string"/>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="type" type="T4_type"/>
+													</xs:sequence>
+													<xs:element name="min" type="T4_min"/>
+												</xs:choice>
+												<xs:element name="mustSupport" type="T4_mustSupport"/>
+											</xs:sequence>
+										</xs:choice>
+									</xs:sequence>
+									<xs:attribute name="id" use="required" type="xs:string"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="T4_binding">
+		<xs:sequence>
+			<xs:element name="extension">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="valueString">
+							<xs:complexType>
+								<xs:attribute name="value" use="required" type="xs:string"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="url" use="required" type="xs:anyURI"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="strength">
+				<xs:complexType>
+					<xs:attribute name="value" use="required" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="description" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="value" use="required" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="valueSet">
+				<xs:complexType>
+					<xs:attribute name="value" use="required" type="xs:anyURI"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T4_max">
+		<xs:attribute name="value" use="required" type="xs:byte"/>
+	</xs:complexType>
+	<xs:complexType name="T4_min">
+		<xs:attribute name="value" use="required" type="xs:byte"/>
+	</xs:complexType>
+	<xs:complexType name="T4_mustSupport">
+		<xs:attribute name="value" use="required" type="xs:boolean"/>
+	</xs:complexType>
+	<xs:complexType name="T4_type">
+		<xs:sequence>
+			<xs:element name="code">
+				<xs:complexType>
+					<xs:attribute name="value" use="required" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:choice minOccurs="0">
+				<xs:element name="targetProfile">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:anyURI"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="profile">
+					<xs:complexType>
+						<xs:attribute name="value" use="required" type="xs:anyURI"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

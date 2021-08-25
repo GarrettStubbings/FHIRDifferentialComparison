@@ -1,0 +1,79 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "834361f6-cee2-4071-a400-9f172d1a3bf5",
+  "meta": {
+    "lastUpdated": "2021-05-07T15:19:12.570+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/fev1perpredictedvalue",
+  "name": "FEV1PERPredictedValue",
+  "title": "Spirometry Care Elements - FEV1% Predicted - Value",
+  "status": "draft",
+  "date": "2021-03-17T00:33:38.7097817+00:00",
+  "publisher": "OMD",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "complex-type",
+  "abstract": false,
+  "type": "Quantity",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Quantity",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Quantity.value",
+        "path": "Quantity.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the measured amount. The value includes an implicit precision in the presentation of the value.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe ratio of FEV1 predicted to FVC predicted, calculated in the population with similar characteristics (height, age, sex, and sometimes race and weight). Sometimes referred to by the alternate name:  FEV1 / FVC predicted ratio.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.031",
+            "comment": "FEV1% Predicted"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.unit",
+        "path": "Quantity.unit",
+        "fixedString": "%",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.031",
+            "comment": "FEV1% Predicted"
+          }
+        ]
+      },
+      {
+        "id": "Quantity.system",
+        "path": "Quantity.system",
+        "fixedUri": "http://unitsofmeasure.org",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE16.031",
+            "comment": "FEV1% Predicted"
+          }
+        ]
+      }
+    ]
+  }
+}

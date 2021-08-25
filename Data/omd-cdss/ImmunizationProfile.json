@@ -1,0 +1,404 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "profile-immunization",
+  "meta": {
+    "lastUpdated": "2021-05-07T12:15:33.803+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/immunizationprofile",
+  "version": "0.0.1",
+  "name": "ImmunizationProfile",
+  "title": "Immunization Profile",
+  "status": "draft",
+  "date": "2021-04-19T14:40:27.9561062+00:00",
+  "publisher": "OMD",
+  "description": "Proposed constraints and extensions on the Immunization resource.  Generated as a first step toward creating a set of Canadian Baseline FHIR profiles.",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Immunization",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Immunization",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Immunization",
+        "path": "Immunization",
+        "short": "Immunization Profile",
+        "definition": "The Immunization Profile is based upon the core FHIR Immunization Resource"
+      },
+      {
+        "id": "Immunization.status",
+        "path": "Immunization.status",
+        "definition": "ASE RESOURCE DEFINITION:\r\nIndicates the current status of the immunization event.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nA flag to indicate whether the immunization was administered or refused.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE08.011",
+            "comment": "Refused Indicator"
+          }
+        ]
+      },
+      {
+        "id": "Immunization.statusReason",
+        "path": "Immunization.statusReason",
+        "comment": "CA Baseline Usage Notes: a reason should be provided if the status is \"not-done\".",
+        "mustSupport": true
+      },
+      {
+        "id": "Immunization.vaccineCode",
+        "path": "Immunization.vaccineCode",
+        "mustSupport": true
+      },
+      {
+        "id": "Immunization.vaccineCode.coding",
+        "path": "Immunization.vaccineCode.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "system"
+            },
+            {
+              "type": "pattern",
+              "path": "code"
+            }
+          ],
+          "rules": "open"
+        },
+        "comment": "CA Baseline Usage Notes: for immunization submission, a server should accept any code a client is able to provide: a Generic code, a Tradename code or both. For immunization retireval, a Trade name is optional, but a Generic code has to be returned if it's known to the server or if it can be derived from the Tradename code.",
+        "min": 1
+      },
+      {
+        "id": "Immunization.vaccineCode.coding:Generic",
+        "path": "Immunization.vaccineCode.coding",
+        "sliceName": "Generic",
+        "comment": "CA Baseline Usage Notes: either a Generic code or a Tradename code or both have to be present.",
+        "max": "1",
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "https://cvc.canimmunize.ca/v3/ValueSet/Generic"
+        }
+      },
+      {
+        "id": "Immunization.vaccineCode.coding:Tradename",
+        "path": "Immunization.vaccineCode.coding",
+        "sliceName": "Tradename",
+        "definition": "BASE RESOURCE DEFINITION: \r\nA reference to a code defined by a terminology system.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe actual Drug Identification Number (DIN) from the EMR's Drug Database for the selected vaccine and/or as typed in by the user. This is the DIN of the vaccine that was administered.",
+        "comment": "CA Baseline Usage Notes: either a Generic code or a Tradename code or both have to be present.",
+        "max": "1",
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "https://cvc.canimmunize.ca/v3/ValueSet/Tradename"
+        },
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE08.002",
+            "comment": "Immunization Code"
+          }
+        ]
+      },
+      {
+        "id": "Immunization.vaccineCode.text",
+        "path": "Immunization.vaccineCode.text",
+        "definition": "BASE RESOURCE DEFINITION: \r\nA human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nThe brand name under which the administered vaccine is marketed in Canada (provided by EMR's drug database) or the name of the vaccine as typed in by the provider.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE08.001",
+            "comment": "Immunization Name"
+          }
+        ]
+      },
+      {
+        "id": "Immunization.patient",
+        "path": "Immunization.patient",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Immunization.encounter",
+        "path": "Immunization.encounter",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-encounter"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Immunization.occurrence[x]",
+        "path": "Immunization.occurrence[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "definition": "BASE RESOURCE DEFINITION:\r\nDate vaccine administered or was to be administered."
+      },
+      {
+        "id": "Immunization.occurrence[x]:occurrenceDateTime",
+        "path": "Immunization.occurrence[x]",
+        "sliceName": "occurrenceDateTime",
+        "definition": "BASE RESOURCE DEFINITION: \r\nDate vaccine administered or was to be administered.\r\n\r\nCDS-S PROFILE DEFINITION (Immunization Date):\r\nThe date the immunization was administered to the patient.\r\n\r\nCDS-S PROFILE DEFINITION (Immunization Refused Date):\r\nThe date the immunization was refused.",
+        "comment": "CA Baseline Usage Notes: occurrenceString is not supported - a combination of occurrenceDateTime (full or partial) with the 'estimated' extension should be used when an exact date is unknown. For example, if a patient recalls that she/he was immunized in June 1980, occurrenceDateTime will have a partial date '1980-06' with 'estimated'=true. Another example: if in 2020, a 55 y.o. patient recalls that she/he was immunized at the age of 5, occurrenceDateTime will have a partial date '1970' with 'estimated'=true",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE08.009",
+            "comment": "Immunization Date"
+          },
+          {
+            "identity": "CDSS5.1",
+            "map": "DE08.010",
+            "comment": "Immunization Refused Date"
+          }
+        ]
+      },
+      {
+        "id": "Immunization.primarySource",
+        "path": "Immunization.primarySource",
+        "short": "Indicates that data is from the primary record created at the time the vaccine was administered.",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Immunization.reportOrigin",
+        "path": "Immunization.reportOrigin",
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "https://cvc.canimmunize.ca/v3/ValueSet/RepSource"
+        }
+      },
+      {
+        "id": "Immunization.location",
+        "path": "Immunization.location",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-location"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Immunization.manufacturer",
+        "path": "Immunization.manufacturer",
+        "definition": "BASE RESOURCE DEFINITION: \r\nName of vaccine manufacturer.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe manufacturer of the administered immunization.",
+        "comment": "CA Baseline Usage Notes: This is a reference to an organization that manufactures the vaccine. TBD: if there is a need to refernce a 'DPD Company', a new extension should be created and used. A 'DPD Company' name, as used in the Health Canada DPF, indicates the organisation (company) that holds the authorization to place the product on the market in Canada. This may not be the company that has manufactured the product, but it is the company that holds the legal responsibility for the use of the product in Canada and should be the same as the company named on the product label/packaging.",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-organization"
+            ]
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE08.004",
+            "comment": "Manufacturer"
+          }
+        ]
+      },
+      {
+        "id": "Immunization.lotNumber",
+        "path": "Immunization.lotNumber",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE08.005",
+            "comment": "Lot Number"
+          }
+        ]
+      },
+      {
+        "id": "Immunization.site",
+        "path": "Immunization.site",
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "https://cvc.canimmunize.ca/v3/ValueSet/AnatomicalSite"
+        }
+      },
+      {
+        "id": "Immunization.site.coding.display",
+        "path": "Immunization.site.coding.display",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA representation of the meaning of the code in the system, following the rules of the system.\r\n\r\nCDS-S PROFILE DEFINITION:",
+        "comment": "Note that FHIR strings SHALL NOT exceed 1MB in size\r\n\r\nCODE SET TABLE: \r\nCT-021: Immunization Site",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE08.007",
+            "comment": "Site"
+          }
+        ]
+      },
+      {
+        "id": "Immunization.route",
+        "path": "Immunization.route",
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "https://cvc.canimmunize.ca/v3/ValueSet/RouteOfAdmin"
+        }
+      },
+      {
+        "id": "Immunization.route.coding.display",
+        "path": "Immunization.route.coding.display",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA representation of the meaning of the code in the system, following the rules of the system.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe route or method the immunization has been administered.",
+        "comment": "Note that FHIR strings SHALL NOT exceed 1MB in size\r\n\r\nCODE SET TABLE: \r\nCT-020: Medication and Immunization Route.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE08.006",
+            "comment": "Route"
+          }
+        ]
+      },
+      {
+        "id": "Immunization.doseQuantity.value",
+        "path": "Immunization.doseQuantity.value",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe value of the measured amount. The value includes an implicit precision in the presentation of the value\r\n\r\nCDS-S PROFILE DEFINITION\r\nDose amount and unit of measure corresponding to the administered immunization.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE08.008",
+            "comment": "Dose"
+          }
+        ]
+      },
+      {
+        "id": "Immunization.performer.function",
+        "path": "Immunization.performer.function",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Immunization.performer.actor",
+        "path": "Immunization.performer.actor",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitioner",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitionerrole",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-organization"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Immunization.note.text",
+        "path": "Immunization.note.text",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe text of the annotation in markdown format.\r\n\r\nCDS-S PROFILE DEFINITION: \r\nAdditional information about the patient's immunization.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE08.013",
+            "comment": "Notes"
+          }
+        ]
+      },
+      {
+        "id": "Immunization.reasonReference",
+        "path": "Immunization.reasonReference",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-condition",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-diagnosticreport"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Immunization.reaction.detail",
+        "path": "Immunization.reaction.detail",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-observation"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Immunization.protocolApplied",
+        "path": "Immunization.protocolApplied",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe protocol (set of recommendations) being followed by the provider who administered the dose.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nInformation pertaining to how the vaccine should be administered (e.g., its relationship to other vaccinations in a series, instructions for the patient).",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE08.012",
+            "comment": "Instructions"
+          }
+        ]
+      },
+      {
+        "id": "Immunization.protocolApplied.authority",
+        "path": "Immunization.protocolApplied.authority",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Immunization.protocolApplied.targetDisease",
+        "path": "Immunization.protocolApplied.targetDisease",
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "https://cvc.canimmunize.ca/v3/ValueSet/Disease"
+        }
+      }
+    ]
+  }
+}

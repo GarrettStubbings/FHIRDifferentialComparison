@@ -1,0 +1,536 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "profile-allergyintolerance",
+  "meta": {
+    "lastUpdated": "2021-05-07T11:37:35.607+00:00"
+  },
+  "url": "https://simplifier.net/omd-cdss/allergyintoleranceprofile",
+  "version": "0.0.3",
+  "name": "AllergyIntoleranceProfile",
+  "title": "AllergyIntolerance Profile",
+  "status": "draft",
+  "date": "2021-04-19T17:40:34.0396742+00:00",
+  "publisher": "OMD",
+  "description": "Proposed constraints and extensions on the AllergyIntolerance Resource",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "CA",
+          "display": "Canada"
+        }
+      ]
+    }
+  ],
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "CDSS5.1",
+      "uri": "www.ontariomd.com",
+      "name": "CDS-S 5.1"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "AllergyIntolerance",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/AllergyIntolerance",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "AllergyIntolerance",
+        "path": "AllergyIntolerance",
+        "short": "AllergyIntolerance Profile",
+        "definition": "The AllergyIntolerance Profile is based upon the core FHIR AllergyIntolerance Resource"
+      },
+      {
+        "id": "AllergyIntolerance.identifier",
+        "path": "AllergyIntolerance.identifier",
+        "mustSupport": true
+      },
+      {
+        "id": "AllergyIntolerance.clinicalStatus",
+        "path": "AllergyIntolerance.clinicalStatus",
+        "mustSupport": true,
+        "isModifierReason": "This element is labeled as a modifier because the status contains the codes refuted and entered-in-error that mark the AllergyIntolerance as not currently valid."
+      },
+      {
+        "id": "AllergyIntolerance.verificationStatus",
+        "path": "AllergyIntolerance.verificationStatus",
+        "mustSupport": true
+      },
+      {
+        "id": "AllergyIntolerance.verificationStatus.coding",
+        "path": "AllergyIntolerance.verificationStatus.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "system"
+            }
+          ],
+          "rules": "closed"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "AllergyIntolerance.verificationStatus.coding:StatusCode",
+        "path": "AllergyIntolerance.verificationStatus.coding",
+        "sliceName": "StatusCode",
+        "short": "Code for allergy or intolerance status",
+        "definition": "Code for an allergy or intolerance statement. Represents whether an allergy/intolerance is active or resolved (indicating no longer active).",
+        "comment": "The binding strength of this element is [Preferred](https://www.hl7.org/fhir/terminologies.html#strength), meaning that codes are encouraged to draw from the AllergyIntoleranceStatusCode value set for interoperability purposes but are not required to do so to be considered conformant.",
+        "max": "1",
+        "binding": {
+          "strength": "preferred",
+          "description": "Assertion about certainty associated with a propensity, or potential risk, of a reaction to the identified substance.",
+          "valueSet": "https://fhir.infoway-inforoute.ca/ValueSet/allergyintolerancestatuscode"
+        }
+      },
+      {
+        "id": "AllergyIntolerance.verificationStatus.coding:StatusCode.system",
+        "path": "AllergyIntolerance.verificationStatus.coding.system",
+        "min": 1
+      },
+      {
+        "id": "AllergyIntolerance.verificationStatus.coding:StatusCode.code",
+        "path": "AllergyIntolerance.verificationStatus.coding.code",
+        "min": 1
+      },
+      {
+        "id": "AllergyIntolerance.verificationStatus.coding:@default",
+        "path": "AllergyIntolerance.verificationStatus.coding",
+        "sliceName": "@default",
+        "definition": "Code for an allergy or intolerance statement. This may be a code for a substance or pharmaceutical product that is considered to be responsible for the adverse reaction risk, an allergy or intolerance condition.",
+        "comment": "The binding strength of this element is [Required](https://hl7.org/fhir/R4/terminologies.html#required), meaning that codes SHALL be taken from the specified value set to be conformant",
+        "min": 1,
+        "max": "1",
+        "binding": {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName",
+              "valueString": "AllergyIntoleranceVerificationStatus"
+            }
+          ],
+          "strength": "required",
+          "description": "Assertion about certainty associated with a propensity, or potential risk, of a reaction to the identified substance.",
+          "valueSet": "http://hl7.org/fhir/ValueSet/allergyintolerance-verification|4.0.1"
+        }
+      },
+      {
+        "id": "AllergyIntolerance.verificationStatus.coding:@default.system",
+        "path": "AllergyIntolerance.verificationStatus.coding.system",
+        "min": 1,
+        "fixedUri": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification"
+      },
+      {
+        "id": "AllergyIntolerance.verificationStatus.coding:@default.code",
+        "path": "AllergyIntolerance.verificationStatus.coding.code",
+        "min": 1
+      },
+      {
+        "id": "AllergyIntolerance.type",
+        "path": "AllergyIntolerance.type",
+        "definition": "BASE RESOURCE DEFINITION:\r\nIdentification of the underlying physiological mechanism for the reaction risk.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nIdentifies whether the reaction is an allergy or an adverse reaction (including intolerance and side effects).",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE11.003",
+            "comment": "Reaction Type"
+          }
+        ]
+      },
+      {
+        "id": "AllergyIntolerance.category",
+        "path": "AllergyIntolerance.category",
+        "mustSupport": true
+      },
+      {
+        "id": "AllergyIntolerance.criticality",
+        "path": "AllergyIntolerance.criticality",
+        "mustSupport": true
+      },
+      {
+        "id": "AllergyIntolerance.code",
+        "path": "AllergyIntolerance.code",
+        "constraint": [
+          {
+            "key": "ca-baseline-allergy",
+            "severity": "error",
+            "human": "AllergyIntolerance.verificationStatus SHALL be present if AllergyIntolerance.code represents NullFlavor concept",
+            "expression": "AllergyIntolerance.code.coding.where(system = 'https://fhir.infoway-inforoute.ca/ValueSet/NullFlavor').exists() or AllergyIntolerance.verificationStatus.exists()",
+            "xpath": "f:code/f:coding/f:system/@value='https://fhir.infoway-inforoute.ca/ValueSet/NullFlavor' or exists(f:verificationStatus)",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-allergyintolerance"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "AllergyIntolerance.code.coding",
+        "path": "AllergyIntolerance.code.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "system"
+            }
+          ],
+          "rules": "closed"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "AllergyIntolerance.code.coding:NotAsked",
+        "path": "AllergyIntolerance.code.coding",
+        "sliceName": "NotAsked",
+        "short": "Code for NOT asked or NOT possible to obtain information about allergy or intolerance",
+        "definition": "Code for the case when a patient has NOT been asked or it is NOT possible to obtain information about any history of allergy or intolerance.",
+        "comment": "The binding strength of this element is [Preferred](https://www.hl7.org/fhir/terminologies.html#strength), meaning that codes are encouraged to draw from the NullFlavor value set for interoperability purposes but are not required to do so to be considered conformant.",
+        "max": "1",
+        "constraint": [
+          {
+            "key": "ca-baseline-allergy-notasked",
+            "severity": "error",
+            "human": "if AllergyIntolerance.code is a NullFlavor value, then AllergyIntolerance.clinicalStatus, AllergyIntolerance.verificationStatus, AllergyIntolerance.type, AllergyIntolerance.category, AllergyIntolerance.criticality SHALL NOT be present",
+            "expression": "AllergyIntolerance.code.coding.where(system = 'https://fhir.infoway-inforoute.ca/ValueSet/NullFlavor').exists() implies (AllergyIntolerance.verificationStatus.exists().not() and AllergyIntolerance.type.exists().not() and AllergyIntolerance.category.exists().not() and AllergyIntolerance.criticality.exists().not())",
+            "xpath": "f:code/f:coding/f:system/@value='https://fhir.infoway-inforoute.ca/ValueSet/NullFlavor' and exists(f:verificationStatus).not() and exists(f:type).not() and exists(f:category).not() and exists(f:criticality).not()",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-allergyintolerance"
+          }
+        ],
+        "binding": {
+          "strength": "preferred",
+          "description": "Negation/exclusion codes for reporting no known allergies or not available data.",
+          "valueSet": "https://fhir.infoway-inforoute.ca/ValueSet/NullFlavor"
+        }
+      },
+      {
+        "id": "AllergyIntolerance.code.coding:NotAsked.system",
+        "path": "AllergyIntolerance.code.coding.system",
+        "min": 1,
+        "fixedUri": "http://hl7.org/fhir/v3/NullFlavor"
+      },
+      {
+        "id": "AllergyIntolerance.code.coding:NotAsked.code",
+        "path": "AllergyIntolerance.code.coding.code",
+        "min": 1
+      },
+      {
+        "id": "AllergyIntolerance.code.coding:NoAllergy",
+        "path": "AllergyIntolerance.code.coding",
+        "sliceName": "NoAllergy",
+        "short": "Code when a patient has been asked and has indicated no history of allergies or intolerance",
+        "definition": "Code for the case when a patient has been asked and has indicated no history of allergies or intolerance.",
+        "max": "1",
+        "constraint": [
+          {
+            "key": "ca-baseline-allergy-noallergy",
+            "severity": "error",
+            "human": "if AllergyIntolerance.code is '716186003' No known allergy, then AllergyIntolerance.verificationStatus SHALL be one of the following: confirmed | refuted | entered-in-error",
+            "expression": "AllergyIntolerance.code.coding.where(system = 'http://snomed.info/sct' and code = '716186003').exists() and AllergyIntolerance.verificationStatus.coding.where(code = 'unconfirmed').empty()",
+            "xpath": "f:code/f:coding/f:system/@value='http://snomed.info/sct' and exists(f:verificationStatus/f:coding/f:code/@value='unconfirmed').not()",
+            "source": "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-allergyintolerance"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "description": "Negation/exclusion codes for reporting no known allergies",
+          "valueSet": "http://snomed.info/sct"
+        }
+      },
+      {
+        "id": "AllergyIntolerance.code.coding:NoAllergy.system",
+        "path": "AllergyIntolerance.code.coding.system",
+        "min": 1,
+        "fixedUri": "http://snomed.info/sct"
+      },
+      {
+        "id": "AllergyIntolerance.code.coding:NoAllergy.code",
+        "path": "AllergyIntolerance.code.coding.code",
+        "min": 1,
+        "fixedCode": "716186003"
+      },
+      {
+        "id": "AllergyIntolerance.code.coding:@default",
+        "path": "AllergyIntolerance.code.coding",
+        "sliceName": "@default",
+        "definition": "Code for an allergy or intolerance statement. This may be a code for a substance or pharmaceutical product that is considered to be responsible for the adverse reaction risk, an allergy or intolerance condition.",
+        "comment": "The binding strength of this element is [Example](https://hl7.org/fhir/R4/terminologies.html#example), meaning that codes are not expected or even encouraged to draw from the specified value set to be conformant",
+        "max": "1",
+        "binding": {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName",
+              "valueString": "AllergyIntoleranceCode"
+            }
+          ],
+          "strength": "example",
+          "description": "Type of the substance/product, allergy or intolerance condition.",
+          "valueSet": "http://hl7.org/fhir/ValueSet/allergyintolerance-code"
+        }
+      },
+      {
+        "id": "AllergyIntolerance.patient",
+        "path": "AllergyIntolerance.patient",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "AllergyIntolerance.encounter",
+        "path": "AllergyIntolerance.encounter",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-encounter"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "AllergyIntolerance.onset[x]",
+        "path": "AllergyIntolerance.onset[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ]
+        },
+        "definition": "BASE RESOURCE DEFINITION:\r\nEstimated or actual date,  date-time, or age when allergy or intolerance was identified.\r\n\r\nCDS-S PROFILE DEFINITION:\r\n(AllergyIntolerance.onset.onsetString) - The life stage of the patient when he/she has been identified as being allergic or having an adverse reaction to a drug or a non-drug.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE11.005",
+            "comment": "Life Stage"
+          }
+        ]
+      },
+      {
+        "id": "AllergyIntolerance.onset[x]:onsetDateTime",
+        "path": "AllergyIntolerance.onset[x]",
+        "sliceName": "onsetDateTime",
+        "definition": "BASE RESOURCE DEFINITION:\r\nEstimated or actual date,  date-time, or age when allergy or intolerance was identified.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe date that the patient reported or has been identified as being allergic or having an adverse reaction to a drug or non-drug.",
+        "comment": "CODE SET TABLE: \r\nCT-016: Life Stage",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE11.004",
+            "comment": "Start Date"
+          }
+        ]
+      },
+      {
+        "id": "AllergyIntolerance.recordedDate",
+        "path": "AllergyIntolerance.recordedDate",
+        "definition": "BASE RESOURCE DEFINITION:\r\nThe recordedDate represents when this particular AllergyIntolerance record was created in the system, which is often a system-generated date.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe date that the allergy or adverse reaction was recorded in the EMR.",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE11.008",
+            "comment": "Recorded Date"
+          }
+        ]
+      },
+      {
+        "id": "AllergyIntolerance.recorder",
+        "path": "AllergyIntolerance.recorder",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitioner",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitionerrole",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "AllergyIntolerance.asserter",
+        "path": "AllergyIntolerance.asserter",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-patient",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitioner",
+              "http://hl7.org/fhir/ca/baseline/StructureDefinition/profile-practitionerrole"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "AllergyIntolerance.note",
+        "path": "AllergyIntolerance.note",
+        "definition": "BASE RESOURCE DEFINITION:\r\nAdditional narrative about the propensity for the Adverse Reaction, not captured in other fields.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nAdditional notes about an allergy or adverse reaction.",
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE11.009",
+            "comment": "Notes"
+          }
+        ]
+      },
+      {
+        "id": "AllergyIntolerance.reaction",
+        "path": "AllergyIntolerance.reaction",
+        "mustSupport": true
+      },
+      {
+        "id": "AllergyIntolerance.reaction.substance",
+        "path": "AllergyIntolerance.reaction.substance",
+        "mustSupport": true
+      },
+      {
+        "id": "AllergyIntolerance.reaction.substance.coding",
+        "path": "AllergyIntolerance.reaction.substance.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "system"
+            }
+          ],
+          "rules": "closed"
+        },
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "AllergyIntolerance.reaction.substance.coding:NonDrugAllergen",
+        "path": "AllergyIntolerance.reaction.substance.coding",
+        "sliceName": "NonDrugAllergen",
+        "short": "Code for the specific non-drug allergen",
+        "definition": "Code for the specific non-drug allergen or other agent/substance to which the Client has an allergic reaction.",
+        "comment": "The binding strength of this element is [Preferred](https://www.hl7.org/fhir/terminologies.html#strength), meaning that codes are encouraged to draw from the NonDrugAllergenCode value set for interoperability purposes but are not required to do so to be considered conformant.",
+        "binding": {
+          "strength": "preferred",
+          "description": "Represents the specific non-drug allergen or other agent/substance to which the Client has an allergic reaction.",
+          "valueSet": "https://fhir.infoway-inforoute.ca/ValueSet/NonDrugAllergenCode"
+        }
+      },
+      {
+        "id": "AllergyIntolerance.reaction.substance.coding:NonDrugAllergen.system",
+        "path": "AllergyIntolerance.reaction.substance.coding.system",
+        "min": 1
+      },
+      {
+        "id": "AllergyIntolerance.reaction.substance.coding:NonDrugAllergen.code",
+        "path": "AllergyIntolerance.reaction.substance.coding.code",
+        "min": 1
+      },
+      {
+        "id": "AllergyIntolerance.reaction.substance.coding:CCDD",
+        "path": "AllergyIntolerance.reaction.substance.coding",
+        "sliceName": "CCDD",
+        "short": "Medicinal products for prescribing",
+        "definition": "The subset of codes with commonly used medicinal products that are available for prescribing and dispensing in Canada.",
+        "comment": "The binding strength of this element is [Preferred](https://www.hl7.org/fhir/terminologies.html#strength), meaning that codes are encouraged to draw from the PrescriptionMedicinalProduct value set for interoperability purposes but are not required to do so to be considered conformant.",
+        "binding": {
+          "strength": "preferred",
+          "description": "Represents subset of codes with commonly used medicinal products that are available for prescribing and dispensing in Canada.",
+          "valueSet": "https://fhir.infoway-inforoute.ca/ValueSet/prescriptionmedicinalproduct"
+        }
+      },
+      {
+        "id": "AllergyIntolerance.reaction.substance.coding:CCDD.system",
+        "path": "AllergyIntolerance.reaction.substance.coding.system",
+        "min": 1,
+        "fixedUri": "https://fhir.infoway-inforoute.ca/CodeSystem/canadianclinicaldrugdataset"
+      },
+      {
+        "id": "AllergyIntolerance.reaction.substance.coding:CCDD.code",
+        "path": "AllergyIntolerance.reaction.substance.coding.code",
+        "min": 1
+      },
+      {
+        "id": "AllergyIntolerance.reaction.substance.coding:@default",
+        "path": "AllergyIntolerance.reaction.substance.coding",
+        "sliceName": "@default",
+        "short": "Specific substance or pharmaceutical product considered to be responsible for event",
+        "definition": "Identification of the specific substance (or pharmaceutical product) considered to be responsible for the Adverse Reaction event.",
+        "comment": "The binding strength of this element is [Example](https://hl7.org/fhir/R4/terminologies.html#example), meaning that codes are not expected or even encouraged to draw from the specified value set to be conformant",
+        "binding": {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName",
+              "valueString": "SubstanceCode"
+            }
+          ],
+          "strength": "example",
+          "description": "Codes defining the type of the substance (including pharmaceutical products).",
+          "valueSet": "http://hl7.org/fhir/ValueSet/substance-code"
+        }
+      },
+      {
+        "id": "AllergyIntolerance.reaction.substance.text",
+        "path": "AllergyIntolerance.reaction.substance.text",
+        "definition": "BASE RESOURCE DEFINITION:\r\nA human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe name of the offending agent, whether drug or non-drug.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE11.001",
+            "comment": "Offending Agent"
+          }
+        ]
+      },
+      {
+        "id": "AllergyIntolerance.reaction.manifestation",
+        "path": "AllergyIntolerance.reaction.manifestation",
+        "mustSupport": true
+      },
+      {
+        "id": "AllergyIntolerance.reaction.severity",
+        "path": "AllergyIntolerance.reaction.severity",
+        "definition": "BASE RESOURCE DEFINITION:\r\nClinical assessment of the severity of the reaction event as a whole, potentially considering multiple different manifestations.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe severity of the allery or adverse reaction as identified by the provider.",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE11.006",
+            "comment": "Severity"
+          }
+        ]
+      },
+      {
+        "id": "AllergyIntolerance.reaction.exposureRoute",
+        "path": "AllergyIntolerance.reaction.exposureRoute",
+        "comment": "The binding strength of this element is [Preferred](https://www.hl7.org/fhir/terminologies.html#strength), meaning that codes are encouraged to draw from the RouteOfAdministration value set for interoperability purposes but are not required to do so to be considered conformant.",
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "https://fhir.infoway-inforoute.ca/ValueSet/RouteOfAdministration"
+        }
+      },
+      {
+        "id": "AllergyIntolerance.reaction.note",
+        "path": "AllergyIntolerance.reaction.note",
+        "definition": "BASE RESOURCE DEFINITION:\r\nAdditional text about the adverse reaction event not captured in other fields.\r\n\r\nCDS-S PROFILE DEFINITION:\r\nThe description of the patient's reaction to a drug or a non-drug (e.g., rash, lip, swelling).",
+        "mustSupport": true,
+        "mapping": [
+          {
+            "identity": "CDSS5.1",
+            "map": "DE11.007",
+            "comment": "Reaction Description"
+          }
+        ]
+      }
+    ]
+  }
+}
