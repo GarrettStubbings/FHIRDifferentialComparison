@@ -67,7 +67,8 @@ if __name__ == '__main__':
         if 'StructureDefinition' in f or 'OMD' in igs[1]:
             if preamble not in f:
                 continue
-            profile_name = f.replace(preamble,"").replace('.json','')
+            profile_name = f.replace(preamble,"").replace('.json','').replace(
+                                                                ".xml","")
             print(profile_name)
             
             # Get the base FHIR Resource for Inheritance
